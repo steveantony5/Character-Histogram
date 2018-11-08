@@ -1,19 +1,21 @@
 /**
-* @file circular_buffer.h
-* @brief An abstraction for circular_buffer.c
+* @file clear_buffer.h
+* @brief An abstraction for clear_buffer.c
 *
-* This header file provides declarations of circular_buffer.c
+* This header file provides declarations of clear_buffer.c
 *
 * @author Steve and Swarupa
-* @date Nov 6, 2018
+* @date Nov 7, 2018
 *
 */
 //***********************************************************************************
 // Include files
 //***********************************************************************************
 
-#ifndef _CIRCULAR_BUFFER_H_
-#define  _CIRCULAR_BUFFER_H_
+#ifndef _CLEAR_BUFFER_H_
+#define _CLEAR_BUFFER_H_
+
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -22,11 +24,7 @@
 //***********************************************************************************
 // function prototypes
 //***********************************************************************************
-
-
-status init_CB(int32_t);
-int8_t IsFULL();
+status clear_buffer();
 int8_t IsEMPTY();
-void insert_link();
 
 #endif

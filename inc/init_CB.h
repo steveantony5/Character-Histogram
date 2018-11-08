@@ -1,21 +1,19 @@
 /**
-* @file insert_data.h
-* @brief An abstraction for insert_data.c
+* @file init_CB.h
+* @brief An abstraction for init_CB.c
 *
-* This header file provides declarations of insert_data.c
+* This header file provides declarations of init_CB.c
 *
 * @author Steve and Swarupa
 * @date Nov 6, 2018
 *
 */
-
 //***********************************************************************************
 // Include files
 //***********************************************************************************
 
-#ifndef _INSERT_DATA_H_
-#define _INSERT_DATA_H_
-
+#ifndef _CIRCULAR_BUFFER_H_
+#define  _CIRCULAR_BUFFER_H_
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -24,8 +22,11 @@
 //***********************************************************************************
 // function prototypes
 //***********************************************************************************
-status insert_data(char);
-int8_t IsEMPTY();
+
+
+status init_CB(int32_t);
 int8_t IsFULL();
+int8_t IsEMPTY();
+void insert_link();
 
 #endif

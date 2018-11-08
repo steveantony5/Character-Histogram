@@ -24,11 +24,11 @@
 
 status resize_CB(int32_t );
 void insert_link();
-status insert_data(int32_t);
+status insert_data(char);
 int8_t IsEMPTY();
 int8_t IsFULL();
 status delete_data();
 status init_CB(int32_t);
 status report_data();
-
+status clear_buffer();
 #endif

@@ -25,7 +25,7 @@
 void insert_link()
 {
 	struct node *temp = (struct node *) malloc (sizeof(struct node));
-    temp->data = 0;
+    temp->data = '\0';
     temp->link = NULL;
 
     if(head!= NULL)
@@ -40,6 +40,6 @@ void insert_link()
     	tail = temp;
 		tail -> link = temp;
     }
-    
+    (CB.max_size)++;
 
 }

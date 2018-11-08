@@ -16,15 +16,21 @@ typedef enum status_t
 
 struct node
 {
-	int32_t data;
+	char data;
 	struct node * link;
 };
 
-struct node* front_CB;
-struct node* rear_CB;
-
 struct node *head;
 struct node *tail;
-int flag;
 
+struct circular_buffer
+{
+	struct node* front_CB;
+	struct node* rear_CB;
+	int32_t length_CB;
+	int32_t max_size;
+};
+
+struct circular_buffer CB;
+int8_t flag_init;
 #endif

@@ -25,29 +25,32 @@
 // Function definition
 //***********************************************************************************
 
-status insert_data(int32_t val)
+status insert_data(char val)
 {
-	static int32_t initial = 0;
-	if(initial == 0)
+	if(flag_init == 0)
 	{
-		front_CB = head;
-    	rear_CB = head;
-	}	
-	if(IsFULL())
-	{
-		printf("The Buffer is FULL");
+		printf("Buffer not initialized\n");
 		return ERROR;
 	}
-	else if((IsEMPTY()) && (flag ==0))
+	else if(IsFULL())
 	{
-		(rear_CB -> data) = val;
-		flag =1;
+		printf("\nThe Buffer is FULL\n");
+		printf("Adding %c failed\n",val);
+		return ERROR;
+	}
+	else if(((CB.front_CB) == (CB.rear_CB))&& (IsEMPTY()))
+	{
+		((CB.rear_CB) -> data) = val;
+		(CB.length_CB)++;
+		printf("Added %c to the buffer\n",val);
 		return SUCCESS;
 	}
 	else
 	{
-		rear_CB = (rear_CB -> link);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-		rear_CB -> data = val;
+		(CB.rear_CB) = ((CB.rear_CB) -> link);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+		((CB.rear_CB) -> data) = val;
+		(CB.length_CB)++;
+		printf("Added %c to the buffer\n",val);
 		return SUCCESS;
 	}
 }

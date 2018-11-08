@@ -1,5 +1,5 @@
 /**
-* @file circular_buffer.c
+* @file init_CB.c
 *
 * This file contains function for checking if the circular buffer is empty, full 
 * and initiating the circular buffer
@@ -12,7 +12,7 @@
 //***********************************************************************************
 // Include files
 //***********************************************************************************
-#include "circular_buffer.h"
+#include "init_CB.h"
 
 //***********************************************************************************
 // Function definition
@@ -32,24 +32,27 @@
 
 status init_CB(int32_t length)
 {
+	
 	head = NULL;
 	tail = NULL;
-	
+	CB.front_CB = NULL;
+	CB.rear_CB = NULL;
+	CB.length_CB = 0;
+	CB.max_size = 0;
+
 	if(length<=0)
 		return ERROR;
 
 	else
 	{
+		flag_init = 1;
 		for(int i=1; i<=length;i++)
 		{
 			insert_link();
-			/*if(i==length)
-			{
-				front_CB = head;
-    			rear_CB = head;
-			}*/
         }
     }
+    (CB.front_CB) = head;
+    (CB.rear_CB) = head;
 	return SUCCESS;
 }
 
@@ -66,7 +69,7 @@ status init_CB(int32_t length)
 
 int8_t IsFULL()
 {
-	if((rear_CB ->link) == front_CB)
+	if((CB.length_CB) == (CB.max_size))
 		return 1;
 	else
 		return 0;
@@ -85,7 +88,7 @@ int8_t IsFULL()
 //****************************************************************************/
 int8_t IsEMPTY()
 {
-	if((front_CB == NULL) && (front_CB == NULL))
+	if((CB.length_CB) == 0)
 		return 1;
 	else
 		return 0;

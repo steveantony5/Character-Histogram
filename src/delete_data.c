@@ -27,20 +27,22 @@
 
 status delete_data()
 {
-	if((IsEMPTY())&& flag ==0)
+	if(flag_init == 0)
 	{
-		printf("Buffer is empty\n");
+		printf("Buffer not initialized\n");
+		return ERROR;
+	}
+	else if(IsEMPTY())
+	{
+		printf("Nothing to delete: Buffer is empty\n");
 		return ERROR;
 
 	}
-	else if((IsEMPTY())&& flag ==1)
-	{
-		flag = 0;
-		return SUCCESS;
-	}
 	else
 	{
-		front_CB = (front_CB -> link);
+		(CB.front_CB) = ((CB.front_CB) -> link);
+		(CB.length_CB)--;
+		printf("Deleted successfully\n");
 		return SUCCESS;
 	}
 }

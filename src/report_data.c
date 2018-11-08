@@ -26,23 +26,27 @@
 
 status report_data()
 {
-	int32_t count=0;
-	if(IsEMPTY())
+	if(flag_init == 0)
 	{
-		printf("Buffer is empty\n");
+		printf("Buffer not initialized\n");
 		return ERROR;
 	}
+	else if(IsEMPTY())
+	{
+		printf("No data to display: Buffer is empty\n");
+		return ERROR;
+	}
+
 	else
 	{
 		struct node* temp;
 		
-
-		for(temp = front_CB; (temp!=rear_CB);(temp= (temp->link)))
+		printf("\nElements in the circular buffer:\n");
+		for((temp = CB.front_CB); (temp!=(CB.rear_CB));(temp= (temp->link)))
 		{
-			count++;
-			printf("data %d\n",(temp->data));
+			printf("Data: %c\n",(temp->data));
 		}
-		printf("data %d\n",(rear_CB->data));
+		printf("Data: %c\n",((CB.rear_CB)->data));
 
 		return SUCCESS;
 	}

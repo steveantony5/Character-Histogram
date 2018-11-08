@@ -1,14 +1,13 @@
-
 //*****************************************************************************
-// Name        : resize_CB
+// Name        : clear_buffer
 //
-// Description : Function to resize the existing circular Buffer
+// Description : Function to clear the data present in circular buffer
 //
 // Author      : Steve and Swarupa
 //
-// Date        : Nov 06, 2018
+// Date        : Nov 07, 2018
 //
-// Arguments   : elements_to_add - No. of elements to the added to the circular buffer inorder to resize it
+// Arguments   : No
 //
 // return      : status
 //				 SUCCESS on completion, otherwise ERROR
@@ -19,29 +18,32 @@
 //***********************************************************************************
 // Include files
 //***********************************************************************************
-#include "resize_CB.h"
+#include "clear_buffer.h"
 
 //***********************************************************************************
 // Function definition
 //***********************************************************************************
-status resize_CB(int32_t elements_to_add)
+
+status clear_buffer()
 {
 	
-	if(elements_to_add<=0)
-		return ERROR;
-
-	else if(flag_init == 0)
+	if(flag_init == 0)
 	{
 		printf("Buffer not initialized\n");
 		return ERROR;
 	}
-
+	else if(IsEMPTY())
+	{
+		printf("Nothing to clear: Buffer is empty\n");
+		return ERROR;
+	}
+	
 	else
 	{
-		for(int i=1; i<=elements_to_add;i++)
-		{
-			insert_link();
-        }
-    }
-	return SUCCESS;
+		(CB.front_CB) = head;
+		(CB.rear_CB) = head;
+		CB.length_CB = 0;
+		printf("Cleared the buffer\n");
+		return SUCCESS;
+	}
 }
