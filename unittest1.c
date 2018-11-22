@@ -8,9 +8,11 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include "inc/common_variable.h"
 #include "CUnit/Basic.h"
 #include "inc/main.h"
 
+	CB buffer;
 
 /*initiating suite*/
 int init_suite_init_CB(void)
@@ -20,7 +22,8 @@ int init_suite_init_CB(void)
 
 int init_suite_insert_data(void)
 {
-	init_CB(8);
+
+	init_CB(&buffer, 8);
 	return 0;
 
 }
@@ -28,24 +31,27 @@ int init_suite_insert_data(void)
 
 int init_suite_delete_data(void)
 {
-	init_CB(1);
-	insert_data('s');
+
+	init_CB(&buffer,1);
+	insert_data(&buffer, 's');
 	return 0;
 }
 
 int init_suite_report_data(void)
 {
-	init_CB(4);
-	insert_data('s');
-	insert_data('t');
+
+	init_CB(&buffer, 4);
+	insert_data(&buffer,'s');
+	insert_data(&buffer,'t');
 	return 0;
 }
 
 int init_suite_resize_and_clean(void)
 {
-	init_CB(2);
-	insert_data('s');
-	insert_data('t');
+
+	init_CB(&buffer,2);
+	insert_data(&buffer,'s');
+	insert_data(&buffer,'t');
 	return 0;
 }
 /*Cleaning suite*/
@@ -57,75 +63,82 @@ int clean_suite(void)
 /*Adding test registry*/
 void test_init_CB() //suite1
 {
-	CU_ASSERT_NOT_EQUAL(insert_data('0'),1);
-	CU_ASSERT_NOT_EQUAL(delete_data(),1);
-	CU_ASSERT_NOT_EQUAL(report_data(),1);
-	CU_ASSERT_NOT_EQUAL(clear_buffer(),1);
-	CU_ASSERT_NOT_EQUAL(resize_CB(3),1);
 
-	CU_ASSERT_EQUAL(init_CB(3), 1);
-	CU_ASSERT_NOT_EQUAL(init_CB(-1), 1);
-	CU_ASSERT_NOT_EQUAL(init_CB(0), 1);
+	CU_ASSERT_NOT_EQUAL(insert_data(&buffer,'0'),1);
+	CU_ASSERT_NOT_EQUAL(delete_data(&buffer),1);
+	CU_ASSERT_NOT_EQUAL(report_data(&buffer),1);
+	CU_ASSERT_NOT_EQUAL(clear_buffer(&buffer),1);
+	CU_ASSERT_NOT_EQUAL(resize_CB(&buffer, 3),1);
+
+	CU_ASSERT_EQUAL(init_CB(&buffer, 3), 1);
+	CU_ASSERT_NOT_EQUAL(init_CB(&buffer, -1), 1);
+	CU_ASSERT_NOT_EQUAL(init_CB(&buffer, 0), 1);
 
 
 }
 
 void test_insert_data() //suite2
 {
-	CU_ASSERT_EQUAL(insert_data('A'),1);
-	CU_ASSERT_EQUAL(insert_data('0'),1);
-	CU_ASSERT_EQUAL(insert_data('&'),1);
-	CU_ASSERT_EQUAL(insert_data(','),1);
-	CU_ASSERT_EQUAL(insert_data('\n'),1);
-	CU_ASSERT_EQUAL(insert_data(' '),1);
-	CU_ASSERT_EQUAL(insert_data('z'),1);
-	CU_ASSERT_EQUAL(insert_data('\\'),1);
+
+	CU_ASSERT_EQUAL(insert_data(&buffer, 'A'),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer, '0'),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer, '&'),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer, ','),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer, '\n'),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer, ' '),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer, 'z'),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer, '\\'),1);
 
 
 
-	CU_ASSERT_NOT_EQUAL(insert_data('5'),1);
-	CU_ASSERT_NOT_EQUAL(insert_data('a'),1);
+	CU_ASSERT_NOT_EQUAL(insert_data(&buffer, '5'),1);
+	CU_ASSERT_NOT_EQUAL(insert_data(&buffer, 'a'),1);
 
 }
 
 void test_delete_data() //suite3
 {
-    CU_ASSERT_EQUAL(delete_data(),1);
-    CU_ASSERT_NOT_EQUAL(delete_data(),1);
+
+    CU_ASSERT_EQUAL(delete_data(&buffer),1);
+    CU_ASSERT_NOT_EQUAL(delete_data(&buffer),1);
 }
 
 void test_report_data() //suite4
 {
-    CU_ASSERT_EQUAL(report_data(),1);
-	CU_ASSERT_EQUAL(delete_data(),1);
-    CU_ASSERT_EQUAL(report_data(), 1);
-   	CU_ASSERT_EQUAL(delete_data(),1);
-	CU_ASSERT_NOT_EQUAL(report_data(), 1);
+
+    CU_ASSERT_EQUAL(report_data(&buffer),1);
+	CU_ASSERT_EQUAL(delete_data(&buffer),1);
+    CU_ASSERT_EQUAL(report_data(&buffer), 1);
+   	CU_ASSERT_EQUAL(delete_data(&buffer),1);
+	CU_ASSERT_NOT_EQUAL(report_data(&buffer), 1);
 
 }
 
 void test_resize_CB() //suite5
 {
-	CU_ASSERT_NOT_EQUAL(insert_data('A'),1);
-	CU_ASSERT_EQUAL(resize_CB(1),1);
-	CU_ASSERT_EQUAL(insert_data('B'),1);
-	CU_ASSERT_NOT_EQUAL(insert_data('B'),1);
 
-	CU_ASSERT_NOT_EQUAL(resize_CB(-2),1);
-	CU_ASSERT_NOT_EQUAL(resize_CB(0),1);
+	CU_ASSERT_NOT_EQUAL(insert_data(&buffer,'A'),1);
+	CU_ASSERT_EQUAL(resize_CB(&buffer,1),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer,'B'),1);
+	CU_ASSERT_NOT_EQUAL(insert_data(&buffer,'B'),1);
+
+	CU_ASSERT_NOT_EQUAL(resize_CB(&buffer,-2),1);
+	CU_ASSERT_NOT_EQUAL(resize_CB(&buffer,0),1);
 
 }
 
 void test_clear_buffer() //suite5
 {
-    CU_ASSERT_EQUAL(clear_buffer(),1);
-    CU_ASSERT_NOT_EQUAL(clear_buffer(),1);
+
+    CU_ASSERT_EQUAL(clear_buffer(&buffer),1);
+    CU_ASSERT_NOT_EQUAL(clear_buffer(&buffer),1);
 
 }
 
 /*main function*/
 int main(void)
 {
+
 	 if (CUE_SUCCESS != CU_initialize_registry())
 	return CU_get_error();
 

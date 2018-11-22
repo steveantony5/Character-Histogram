@@ -20,17 +20,17 @@ struct node
 	struct node * link;
 };
 
-struct node *head;
-struct node *tail;
 
-struct circular_buffer
+
+typedef struct
 {
 	struct node* front_CB;
 	struct node* rear_CB;
+	struct node *head;
+	struct node *tail;
 	int32_t length_CB;
 	int32_t max_size;
-};
+	int8_t flag_init;
+}CB;
 
-struct circular_buffer CB;
-int8_t flag_init;
 #endif

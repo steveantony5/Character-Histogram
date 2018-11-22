@@ -25,14 +25,14 @@
 // Function definition
 //***********************************************************************************
 
-status delete_data()
+status delete_data(CB *buffer)
 {
-	if(flag_init == 0)
+	if((buffer->flag_init) != 1)
 	{
 		printf("Buffer not initialized\n");
 		return ERROR;
 	}
-	else if(IsEMPTY())
+	else if(IsEMPTY(buffer))
 	{
 		printf("Nothing to delete: Buffer is empty\n");
 		return ERROR;
@@ -40,8 +40,8 @@ status delete_data()
 	}
 	else
 	{
-		(CB.front_CB) = ((CB.front_CB) -> link);
-		(CB.length_CB)--;
+		(buffer->front_CB) = ((buffer->front_CB) -> link);
+		(buffer->length_CB)--;
 		printf("Deleted successfully\n");
 		return SUCCESS;
 	}

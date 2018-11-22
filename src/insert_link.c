@@ -22,24 +22,24 @@
 // Function definition
 //***********************************************************************************
 
-void insert_link()
+void insert_link(CB *buffer)
 {
 	struct node *temp = (struct node *) malloc (sizeof(struct node));
     temp->data = '\0';
     temp->link = NULL;
 
-    if(head!= NULL)
+    if((buffer->head)!= NULL)
     {
-    	temp->link = head;
-        head = temp;
-        tail->link = head;
+    	(temp->link) = (buffer->head);
+        (buffer->head) = temp;
+        ((buffer->tail)->link) = (buffer->head);
     }
     else
     {
-    	head = temp;
-    	tail = temp;
-		tail -> link = temp;
+    	(buffer->head) = temp;
+    	(buffer->tail) = temp;
+		((buffer->tail) -> link) = temp;
     }
-    (CB.max_size)++;
+    (buffer->max_size)++;
 
 }

@@ -1,11 +1,12 @@
+
 //*****************************************************************************
-// Name        : clear_buffer
+// Name        : pop_data
 //
-// Description : Function to clear the data present in circular buffer
+// Description : Function to pop data out of circular Buffer
 //
 // Author      : Steve and Swarupa
 //
-// Date        : Nov 07, 2018
+// Date        : Nov 18, 2018
 //
 // Arguments   : No
 //
@@ -18,15 +19,14 @@
 //***********************************************************************************
 // Include files
 //***********************************************************************************
-#include "clear_buffer.h"
+#include "pop_data.h"
 
 //***********************************************************************************
 // Function definition
 //***********************************************************************************
 
-status clear_buffer(CB *buffer)
+status pop_data(CB *buffer,char *data)
 {
-	
 	if((buffer->flag_init) != 1)
 	{
 		printf("Buffer not initialized\n");
@@ -34,16 +34,16 @@ status clear_buffer(CB *buffer)
 	}
 	else if(IsEMPTY(buffer))
 	{
-		printf("Nothing to clear: Buffer is empty\n");
+		printf("Nothing to pop: Buffer is empty\n");
 		return ERROR;
+
 	}
-	
 	else
 	{
-		(buffer->front_CB) = (buffer->head);
-		(buffer->rear_CB) = (buffer->head);
-		(buffer->length_CB) = 0;
-		printf("Cleared the buffer\n");
+		(*data) = '\0';
+		(*data) = ((buffer->front_CB) -> data);
+		(buffer->front_CB) = ((buffer->front_CB) -> link);
+		(buffer->length_CB)--;
 		return SUCCESS;
 	}
 }

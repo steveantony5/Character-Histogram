@@ -23,42 +23,22 @@
 //***********************************************************************************
 int main()
 {
-	resize_CB(2);
-	delete_data();
-	init_CB(3);
-	insert_data('1');
-	insert_data('a');
-	insert_data(',');
-	insert_data('f');
-	insert_data('o');
-	report_data();
-
-	init_CB(1);
-
-	insert_data('1');	
-	report_data();
-	
-	/*printf("max %d",(CB.max_size));
-	printf("leng %d\n",(CB.length_CB));
-	insert_data('1');
-		printf("max %d",(CB.max_size));
-	printf("leng %d\n",(CB.length_CB));
-	
-	report_data();
-	printf("\nclear\n");
-	clear_buffer();
-	printf("max %d",(CB.max_size));
-	printf("leng %d\n",(CB.length_CB));
-	insert_data('A');
-	printf("max %d",(CB.max_size));
-	printf("leng %d\n",(CB.length_CB));
-	insert_data('B');
-	report_data();*/
-	//printf("%d %p\n",(front_CB->data),(front_CB->link));
-	//printf("%d %p\n",(rear_CB->data),(rear_CB->link));
+	CB RX_Buffer;
+	init_CB(&RX_Buffer,5);
+	insert_data(&RX_Buffer,'3');
+	insert_data(&RX_Buffer,'a');
 
 
 
+	report_data(&RX_Buffer);
 
+	delete_data(&RX_Buffer);
+	report_data(&RX_Buffer);
+
+	CB TX_Buffer;
+	init_CB(&TX_Buffer,3);
+	insert_data(&TX_Buffer,'d');
+	insert_data(&TX_Buffer,'2');
+	report_data(&TX_Buffer);
 
 }

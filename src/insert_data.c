@@ -25,31 +25,31 @@
 // Function definition
 //***********************************************************************************
 
-status insert_data(char val)
+status insert_data(CB *buffer,char val)
 {
-	if(flag_init == 0)
+	if((buffer->flag_init) != 0)
 	{
 		printf("Buffer not initialized\n");
 		return ERROR;
 	}
-	else if(IsFULL())
+	else if(IsFULL(buffer))
 	{
 		printf("\nThe Buffer is FULL\n");
 		printf("Adding %c failed\n",val);
 		return ERROR;
 	}
-	else if(((CB.front_CB) == (CB.rear_CB))&& (IsEMPTY()))
+	else if(((buffer->front_CB) == (buffer->rear_CB))&& (IsEMPTY(buffer)))
 	{
-		((CB.rear_CB) -> data) = val;
-		(CB.length_CB)++;
+		((buffer->rear_CB) -> data) = val;
+		(buffer->length_CB)++;
 		printf("Added %c to the buffer\n",val);
 		return SUCCESS;
 	}
 	else
 	{
-		(CB.rear_CB) = ((CB.rear_CB) -> link);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-		((CB.rear_CB) -> data) = val;
-		(CB.length_CB)++;
+		(buffer->rear_CB) = ((buffer->rear_CB) -> link);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+		((buffer->rear_CB) -> data) = val;
+		(buffer->length_CB)++;
 		printf("Added %c to the buffer\n",val);
 		return SUCCESS;
 	}

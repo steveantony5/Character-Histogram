@@ -22,13 +22,14 @@
 
 
 
-status resize_CB(int32_t );
-void insert_link();
-status insert_data(char);
-int8_t IsEMPTY();
-int8_t IsFULL();
-status delete_data();
-status init_CB(int32_t);
-status report_data();
-status clear_buffer();
+status resize_CB(CB *, int32_t );
+void insert_link(CB *);
+status insert_data(CB *,char);
+int8_t IsEMPTY(CB *);
+int8_t IsFULL(CB *);
+status delete_data(CB *);
+status init_CB(CB *,int32_t);
+status report_data(CB *);
+status clear_buffer(CB *);
+status pop_data(CB *, char *);
 #endif

@@ -24,9 +24,9 @@
 //***********************************************************************************
 
 
-status init_CB(int32_t);
-int8_t IsFULL();
-int8_t IsEMPTY();
-void insert_link();
+status init_CB(CB *, int32_t);
+int8_t IsFULL(CB *);
+int8_t IsEMPTY(CB *);
+void insert_link(CB *);
 
 #endif

@@ -30,29 +30,30 @@
 //****************************************************************************/
 
 
-status init_CB(int32_t length)
+status init_CB(CB *buffer,int32_t length)
 {
-	
-	head = NULL;
-	tail = NULL;
-	CB.front_CB = NULL;
-	CB.rear_CB = NULL;
-	CB.length_CB = 0;
-	CB.max_size = 0;
+	(buffer->head) = NULL;
+	(buffer->tail) = NULL;
+	(buffer->front_CB) = NULL;
+	(buffer->rear_CB) = NULL;
+	(buffer->length_CB) = 0;
+	(buffer->max_size) = 0;
+	(buffer->flag_init) = 0;
 
 	if(length<=0)
 		return ERROR;
 
 	else
 	{
-		flag_init = 1;
+		(buffer->flag_init) = 1;
 		for(int i=1; i<=length;i++)
 		{
-			insert_link();
+			insert_link(buffer);
         }
     }
-    (CB.front_CB) = head;
-    (CB.rear_CB) = head;
+    (buffer->front_CB) = (buffer->head);
+    (buffer->rear_CB) = (buffer->head);
+
 	return SUCCESS;
 }
 
@@ -67,9 +68,9 @@ status init_CB(int32_t length)
 //
 //****************************************************************************/
 
-int8_t IsFULL()
+int8_t IsFULL(CB *buffer)
 {
-	if((CB.length_CB) == (CB.max_size))
+	if((buffer->length_CB) == (buffer->max_size))
 		return 1;
 	else
 		return 0;
@@ -86,9 +87,9 @@ int8_t IsFULL()
 // return      : 1 if it is Empty, otherwise 0
 //
 //****************************************************************************/
-int8_t IsEMPTY()
+int8_t IsEMPTY(CB *buffer)
 {
-	if((CB.length_CB) == 0)
+	if((buffer->length_CB) == 0)
 		return 1;
 	else
 		return 0;

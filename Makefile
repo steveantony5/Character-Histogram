@@ -7,6 +7,7 @@ COMMON_C_SRCS = \
 ./src/resize_CB.c \
 ./src/report_data.c\
 ./src/clear_buffer.c\
+./src/pop_data.c\
 ./main.c
 
 

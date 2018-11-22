@@ -24,13 +24,13 @@
 //***********************************************************************************
 // Function definition
 //***********************************************************************************
-status resize_CB(int32_t elements_to_add)
+status resize_CB(CB *buffer, int32_t elements_to_add)
 {
 	
 	if(elements_to_add<=0)
 		return ERROR;
 
-	else if(flag_init == 0)
+	else if((buffer->flag_init) != 1)
 	{
 		printf("Buffer not initialized\n");
 		return ERROR;
@@ -40,7 +40,7 @@ status resize_CB(int32_t elements_to_add)
 	{
 		for(int i=1; i<=elements_to_add;i++)
 		{
-			insert_link();
+			insert_link(buffer);
         }
     }
 	return SUCCESS;

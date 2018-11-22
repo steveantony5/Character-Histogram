@@ -24,8 +24,8 @@
 //***********************************************************************************
 // function prototypes
 //***********************************************************************************
-status insert_data(char);
-int8_t IsEMPTY();
-int8_t IsFULL();
+status insert_data(CB *, char);
+int8_t IsEMPTY(CB *);
+int8_t IsFULL(CB *);
 
 #endif

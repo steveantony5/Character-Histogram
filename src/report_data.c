@@ -24,14 +24,14 @@
 // Function definition
 //***********************************************************************************
 
-status report_data()
+status report_data(CB *buffer)
 {
-	if(flag_init == 0)
+	if((buffer->flag_init) != 1)
 	{
 		printf("Buffer not initialized\n");
 		return ERROR;
 	}
-	else if(IsEMPTY())
+	else if(IsEMPTY(buffer))
 	{
 		printf("No data to display: Buffer is empty\n");
 		return ERROR;
@@ -42,11 +42,11 @@ status report_data()
 		struct node* temp;
 		
 		printf("\nElements in the circular buffer:\n");
-		for((temp = CB.front_CB); (temp!=(CB.rear_CB));(temp= (temp->link)))
+		for((temp = (buffer->front_CB)); (temp!=(buffer->rear_CB));(temp= (temp->link)))
 		{
 			printf("Data: %c\n",(temp->data));
 		}
-		printf("Data: %c\n",((CB.rear_CB)->data));
+		printf("Data: %c\n",((buffer->rear_CB)->data));
 
 		return SUCCESS;
 	}

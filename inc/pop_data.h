@@ -1,19 +1,19 @@
 /**
-* @file delete_data.h
-* @brief An abstraction for delete_data.c
+* @file pop_data.h
+* @brief An abstraction for pop_data.c
 *
-* This header file provides declarations of delete_data.c
+* This header file provides declarations of pop_data.c
 *
 * @author Steve and Swarupa
-* @date Nov 6, 2018
+* @date Nov 18, 2018
 *
 */
 //***********************************************************************************
 // Include files
 //***********************************************************************************
 
-#ifndef _DELETE_DATA_H_
-#define _DELETE_DATA_H_
+#ifndef _POP_DATA_H_
+#define _POP_DATA_H_
 
 
 #include <stdio.h>
@@ -24,7 +24,7 @@
 //***********************************************************************************
 // function prototypes
 //***********************************************************************************
-status delete_data(CB *);
+status pop_data(CB *, char *);
 int8_t IsEMPTY(CB *);
 
 #endif
