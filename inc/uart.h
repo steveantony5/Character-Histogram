@@ -5,18 +5,20 @@
  *      Author: Swarupa De
  */
 
-#ifdef FRDM
 
 #ifndef INCLUDE_UART_H_
 #define INCLUDE_UART_H_
 
 #include "common_variable.h"
 
-#ifdef FRDM
+
 void uartinit();
 status receive_from_console();
+void RX_interrupt_init();
+void send_to_console_str(char []);
+void send_to_console(uint8_t);
 
-#endif
+
 
 status resize_CB(CB *, int32_t );
 void insert_link(CB *);
@@ -37,4 +39,3 @@ status pop_data(CB *,uint8_t *);
 #endif /* INCLUDE_UART_H_ */
 
 
-#endif
