@@ -5,7 +5,7 @@
  *      Author: Swarupa De
  */
 
-#ifdef FRDM
+
 
 #include "MKL25Z4.h"
 #include "uart.h"
@@ -114,4 +114,4 @@ void UART0_IRQHandler()
 		}
 }
 
-#endif
+
