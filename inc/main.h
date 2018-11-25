@@ -20,6 +20,10 @@
 #include <stdio.h>
 #include "common_variable.h"
 
+#ifdef FRDM
+#include "uart.h"
+#endif
+
 #define SIZE_OF_RX_CB (30)
 
 status resize_CB(CB *, int32_t );
@@ -33,9 +37,5 @@ status report_data(CB *);
 status clear_buffer(CB *);
 status pop_data(CB *,uint8_t *);
 
-#ifdef FRDM
-void uartinit();
-void RX_interrupt_init();
-#endif
 
 #endif
