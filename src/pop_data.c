@@ -25,22 +25,22 @@
 // Function definition
 //***********************************************************************************
 
-status pop_data(CB *buffer,char *data)
+status pop_data(CB *buffer,uint8_t *data)
 {
+	*data = 0;
 	if((buffer->flag_init) != 1)
 	{
-		printf("Buffer not initialized\n");
+		PRINT("Buffer not initialized\r\n");
 		return ERROR;
 	}
 	else if(IsEMPTY(buffer))
 	{
-		printf("Nothing to pop: Buffer is empty\n");
+		PRINT("Nothing to pop: Buffer is empty\r\n");
 		return ERROR;
 
 	}
 	else
 	{
-		(*data) = '\0';
 		(*data) = ((buffer->front_CB) -> data);
 		(buffer->front_CB) = ((buffer->front_CB) -> link);
 		(buffer->length_CB)--;

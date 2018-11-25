@@ -25,8 +25,8 @@ int main()
 {
 	CB RX_Buffer;
 	init_CB(&RX_Buffer,5);
-	insert_data(&RX_Buffer,'3');
-	insert_data(&RX_Buffer,'a');
+	insert_data(&RX_Buffer,3);
+	insert_data(&RX_Buffer,10);
 
 
 
@@ -36,9 +36,9 @@ int main()
 	report_data(&RX_Buffer);
 
 	CB TX_Buffer;
-	init_CB(&TX_Buffer,3);
-	insert_data(&TX_Buffer,'d');
-	insert_data(&TX_Buffer,'2');
+	init_CB(&TX_Buffer,1);
+	insert_data(&TX_Buffer,9);
+	insert_data(&TX_Buffer,2);
 	report_data(&TX_Buffer);
 
 }

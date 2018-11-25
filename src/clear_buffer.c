@@ -29,12 +29,12 @@ status clear_buffer(CB *buffer)
 	
 	if((buffer->flag_init) != 1)
 	{
-		printf("Buffer not initialized\n");
+		PRINT("Buffer not initialized\r\n");
 		return ERROR;
 	}
 	else if(IsEMPTY(buffer))
 	{
-		printf("Nothing to clear: Buffer is empty\n");
+		PRINT("Nothing to clear: Buffer is empty\r\n");
 		return ERROR;
 	}
 	
@@ -43,7 +43,7 @@ status clear_buffer(CB *buffer)
 		(buffer->front_CB) = (buffer->head);
 		(buffer->rear_CB) = (buffer->head);
 		(buffer->length_CB) = 0;
-		printf("Cleared the buffer\n");
+		PRINT("Cleared the buffer\r\n");
 		return SUCCESS;
 	}
 }

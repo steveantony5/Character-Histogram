@@ -32,7 +32,7 @@ status resize_CB(CB *buffer, int32_t elements_to_add)
 
 	else if((buffer->flag_init) != 1)
 	{
-		printf("Buffer not initialized\n");
+		PRINT("Buffer not initialized\r\n");
 		return ERROR;
 	}
 

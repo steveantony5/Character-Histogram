@@ -20,16 +20,22 @@
 #include <stdio.h>
 #include "common_variable.h"
 
-
+#define SIZE_OF_RX_CB (30)
 
 status resize_CB(CB *, int32_t );
 void insert_link(CB *);
-status insert_data(CB *,char);
+status insert_data(CB *,uint8_t);
 int8_t IsEMPTY(CB *);
 int8_t IsFULL(CB *);
 status delete_data(CB *);
 status init_CB(CB *,int32_t);
 status report_data(CB *);
 status clear_buffer(CB *);
-status pop_data(CB *, char *);
+status pop_data(CB *,uint8_t *);
+
+#ifdef FRDM
+void uartinit();
+void RX_interrupt_init();
+#endif
+
 #endif

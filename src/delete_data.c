@@ -29,12 +29,12 @@ status delete_data(CB *buffer)
 {
 	if((buffer->flag_init) != 1)
 	{
-		printf("Buffer not initialized\n");
+		PRINT("Buffer not initialized\r\n");
 		return ERROR;
 	}
 	else if(IsEMPTY(buffer))
 	{
-		printf("Nothing to delete: Buffer is empty\n");
+		PRINT("Nothing to delete: Buffer is empty\r\n");
 		return ERROR;
 
 	}
@@ -42,7 +42,7 @@ status delete_data(CB *buffer)
 	{
 		(buffer->front_CB) = ((buffer->front_CB) -> link);
 		(buffer->length_CB)--;
-		printf("Deleted successfully\n");
+		PRINT("Deleted successfully\r\n");
 		return SUCCESS;
 	}
 }

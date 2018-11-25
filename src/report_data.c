@@ -28,12 +28,12 @@ status report_data(CB *buffer)
 {
 	if((buffer->flag_init) != 1)
 	{
-		printf("Buffer not initialized\n");
+		PRINT("Buffer not initialized\r\n");
 		return ERROR;
 	}
 	else if(IsEMPTY(buffer))
 	{
-		printf("No data to display: Buffer is empty\n");
+		PRINT("No data to display: Buffer is empty\r\n");
 		return ERROR;
 	}
 
@@ -41,12 +41,25 @@ status report_data(CB *buffer)
 	{
 		struct node* temp;
 		
-		printf("\nElements in the circular buffer:\n");
+		PRINT("\nElements in the circular buffer:\r\n");
 		for((temp = (buffer->front_CB)); (temp!=(buffer->rear_CB));(temp= (temp->link)))
 		{
-			printf("Data: %c\n",(temp->data));
+			#ifdef FRDM
+			send_to_console((temp->data));
+			#else
+			printf("%d", temp->data);
+			#endif
+			PRINT("\r\n");
 		}
-		printf("Data: %c\n",((buffer->rear_CB)->data));
+
+
+		#ifdef FRDM
+		send_to_console(((buffer->rear_CB)->data));
+		#else
+		printf("%d",((buffer->rear_CB)->data));
+		#endif
+
+		PRINT("\r\n");
 
 		return SUCCESS;
 	}

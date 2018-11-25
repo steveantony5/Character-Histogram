@@ -79,7 +79,6 @@ void test_init_CB() //suite1
 
 void test_insert_data() //suite2
 {
-
 	CU_ASSERT_EQUAL(insert_data(&buffer, 'A'),1);
 	CU_ASSERT_EQUAL(insert_data(&buffer, '0'),1);
 	CU_ASSERT_EQUAL(insert_data(&buffer, '&'),1);

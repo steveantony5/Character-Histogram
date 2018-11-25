@@ -25,24 +25,28 @@
 // Function definition
 //***********************************************************************************
 
-status insert_data(CB *buffer,char val)
+status insert_data(CB *buffer,uint8_t val)
 {
-	if((buffer->flag_init) != 0)
+	if((buffer->flag_init) != 1)
 	{
-		printf("Buffer not initialized\n");
+		PRINT("Buffer not initialized\r\n");
 		return ERROR;
 	}
 	else if(IsFULL(buffer))
 	{
-		printf("\nThe Buffer is FULL\n");
-		printf("Adding %c failed\n",val);
+		PRINT("\nThe Buffer is FULL\r\n");
+		PRINT("Adding failed\r\n");
 		return ERROR;
 	}
 	else if(((buffer->front_CB) == (buffer->rear_CB))&& (IsEMPTY(buffer)))
 	{
 		((buffer->rear_CB) -> data) = val;
 		(buffer->length_CB)++;
-		printf("Added %c to the buffer\n",val);
+#ifdef DEBUG
+		PRINT("Added to the buffer\r\n");
+		send_to_console((buffer->rear_CB) -> data);
+		PRINT("\r\n");
+#endif
 		return SUCCESS;
 	}
 	else
@@ -50,7 +54,11 @@ status insert_data(CB *buffer,char val)
 		(buffer->rear_CB) = ((buffer->rear_CB) -> link);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 		((buffer->rear_CB) -> data) = val;
 		(buffer->length_CB)++;
-		printf("Added %c to the buffer\n",val);
+#ifdef DEBUG
+		PRINT("Added to the buffer\r\n");
+		send_to_console((buffer->rear_CB) -> data);
+		PRINT("\r\n");
+#endif
 		return SUCCESS;
 	}
 }
