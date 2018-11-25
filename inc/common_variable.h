@@ -1,11 +1,9 @@
-
-
-
 #ifndef _COMMON_VARIABLE_H_
 #define  _COMMON_VARIABLE_H_
 
-//#define FRDM
-#define LINUX
+#define FRDM
+
+//#define LINUX
 
 //#define DEBUG
 
@@ -13,9 +11,14 @@
 
 
 #ifdef FRDM
-	
+
 	#define POLLING
 	#define INTERRUPTS
+	#define PRINT send_to_console_str
+#endif
+
+#ifdef LINUX
+	#define PRINT printf
 #endif
 
 typedef enum status_t
@@ -45,15 +48,7 @@ typedef struct
 	int8_t flag_init;
 }CB;
 
-#ifdef FRDM
-#define PRINT send_to_console_str
-void send_to_console(uint8_t data);
-void send_to_console_str(char []);
 
-#else
-#define PRINT printf
-	
-#endif
 
 
 
