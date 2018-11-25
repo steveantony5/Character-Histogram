@@ -21,10 +21,17 @@
 #include <stdlib.h>
 #include "common_variable.h"
 
+#ifdef FRDM
+#include "uart.h"
+#endif
+
+
+
 //***********************************************************************************
 // function prototypes
 //***********************************************************************************
 status pop_data(CB *,uint8_t *);
 int8_t IsEMPTY(CB *);
+
 
 #endif
