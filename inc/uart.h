@@ -21,7 +21,7 @@ void send_to_console(uint8_t);
 
 
 status resize_CB(CB *, int32_t );
-void insert_link(CB *);
+status insert_link(CB *);
 status insert_data(CB *,uint8_t);
 int8_t IsEMPTY(CB *);
 int8_t IsFULL(CB *);

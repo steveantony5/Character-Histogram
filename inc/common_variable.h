@@ -1,9 +1,9 @@
 #ifndef _COMMON_VARIABLE_H_
 #define  _COMMON_VARIABLE_H_
 
-#define FRDM
+//#define FRDM
 
-//#define LINUX
+#define LINUX
 
 //#define DEBUG
 
@@ -23,6 +23,9 @@
 
 typedef enum status_t
 {
+	OVERFLOW = -4,
+	EMPTY = -3,
+	BUFFER_NOT_INITIALISED = -2,
 	ERROR = -1,
 	SUCCESS = 1,
 }status;

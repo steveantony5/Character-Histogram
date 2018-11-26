@@ -22,9 +22,13 @@
 // Function definition
 //***********************************************************************************
 
-void insert_link(CB *buffer)
+status insert_link(CB *buffer)
 {
 	struct node *temp = (struct node *) malloc (sizeof(struct node));
+    if (temp == NULL)
+    {
+        return ERROR;
+    }
     temp->data = '\0';
     temp->link = NULL;
 
@@ -41,5 +45,7 @@ void insert_link(CB *buffer)
 		((buffer->tail) -> link) = temp;
     }
     (buffer->max_size)++;
+
+    return SUCCESS;
 
 }

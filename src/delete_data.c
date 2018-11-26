@@ -30,12 +30,12 @@ status delete_data(CB *buffer)
 	if((buffer->flag_init) != 1)
 	{
 		PRINT("Buffer not initialized\r\n");
-		return ERROR;
+		return BUFFER_NOT_INITIALISED;
 	}
 	else if(IsEMPTY(buffer))
 	{
 		PRINT("Nothing to delete: Buffer is empty\r\n");
-		return ERROR;
+		return EMPTY;
 
 	}
 	else

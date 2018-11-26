@@ -31,12 +31,12 @@ status pop_data(CB *buffer,uint8_t *data)
 	if((buffer->flag_init) != 1)
 	{
 		PRINT("Buffer not initialized\r\n");
-		return ERROR;
+		return BUFFER_NOT_INITIALISED;
 	}
 	else if(IsEMPTY(buffer))
 	{
 		PRINT("Nothing to pop: Buffer is empty\r\n");
-		return ERROR;
+		return EMPTY;
 
 	}
 	else

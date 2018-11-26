@@ -12,7 +12,7 @@
 #include "CUnit/Basic.h"
 #include "inc/main.h"
 
-	CB buffer;
+CB buffer;
 
 /*initiating suite*/
 int init_suite_init_CB(void)

@@ -28,6 +28,6 @@
 // function prototypes
 //***********************************************************************************
 status resize_CB(CB *,int32_t );
-void insert_link(CB *);
+status insert_link(CB *);
 
 #endif

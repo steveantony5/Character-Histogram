@@ -31,6 +31,6 @@
 status init_CB(CB *, int32_t);
 int8_t IsFULL(CB *);
 int8_t IsEMPTY(CB *);
-void insert_link(CB *);
+status insert_link(CB *);
 
 #endif

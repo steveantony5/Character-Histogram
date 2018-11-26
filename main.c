@@ -24,22 +24,22 @@
 int main(void)
 {
 #ifdef LINUX
-	init_CB(&RX_Buffer,5);
-	insert_data(&RX_Buffer,3);
-	insert_data(&RX_Buffer,10);
+	init_CB(&RX_buffer,1);
+	insert_data(&RX_buffer,3);
+	report_data(&RX_buffer);
+
+insert:
+	if(insert_data(&RX_buffer,3)== OVERFLOW )
+	{
+		resize_CB(&RX_buffer,((RX_buffer.max_size)*2));
+		goto insert;
+	}
+
+	report_data(&RX_buffer);
 
 
 
-	report_data(&RX_Buffer);
 
-	delete_data(&RX_Buffer);
-	report_data(&RX_Buffer);
-
-	CB TX_Buffer;
-	init_CB(&TX_Buffer,1);
-	insert_data(&TX_Buffer,9);
-	insert_data(&TX_Buffer,2);
-	report_data(&TX_Buffer);
 #endif
 
 #ifdef FRDM

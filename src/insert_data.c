@@ -30,13 +30,13 @@ status insert_data(CB *buffer,uint8_t val)
 	if((buffer->flag_init) != 1)
 	{
 		PRINT("Buffer not initialized\r\n");
-		return ERROR;
+		return BUFFER_NOT_INITIALISED;
 	}
 	else if(IsFULL(buffer))
 	{
 		PRINT("\nThe Buffer is FULL\r\n");
 		PRINT("Adding failed\r\n");
-		return ERROR;
+		return OVERFLOW;
 	}
 	else if(((buffer->front_CB) == (buffer->rear_CB))&& (IsEMPTY(buffer)))
 	{
