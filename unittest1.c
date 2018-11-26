@@ -12,7 +12,50 @@
 #include "CUnit/Basic.h"
 #include "inc/main.h"
 
-CB buffer;
+#define COUNT (10)
+uint8_t *p;
+uint8_t data_pop;
+uint8_t parameter_value[COUNT];
+CB buffer_1;
+CB buffer_2;
+CB buffer_3;
+CB buffer_4;
+CB buffer_5;
+CB buffer_6;
+CB buffer_7;
+CB buffer_8;
+
+/*a random value generator function */
+int random_generator(int8_t seed)
+{
+
+   
+ 
+  for(int i= 0; i<COUNT; i++) 
+    {
+     seed = (7 *seed) % 8191;
+     if(seed > 200)
+     {
+      seed = seed % 200;
+     }
+     parameter_value[i] = seed;
+    }
+
+}  
+
+int init(void)
+{
+	init_CB(&buffer_2, (COUNT/2));
+	init_CB(&buffer_3, (COUNT));
+	
+
+}
+
+int init_delete(void)
+{
+	init_CB(&buffer_4, (COUNT));
+}
+
 
 /*initiating suite*/
 int init_suite_init_CB(void)
@@ -20,40 +63,38 @@ int init_suite_init_CB(void)
 	return 0;
 }
 
-int init_suite_insert_data(void)
-{
-
-	init_CB(&buffer, 8);
-	return 0;
-
-}
-
-
-int init_suite_delete_data(void)
-{
-
-	init_CB(&buffer,1);
-	insert_data(&buffer, 's');
-	return 0;
-}
 
 int init_suite_report_data(void)
 {
-
-	init_CB(&buffer, 4);
-	insert_data(&buffer,'s');
-	insert_data(&buffer,'t');
+    init_CB(&buffer_5, (COUNT));
 	return 0;
 }
 
-int init_suite_resize_and_clean(void)
+int init_suite_resize(void)
 {
-
-	init_CB(&buffer,2);
-	insert_data(&buffer,'s');
-	insert_data(&buffer,'t');
+    init_CB(&buffer_6, (COUNT/2));
+    init_CB(&buffer_7, (COUNT));
+     int i;
+        
+	for(p= parameter_value,i=0; i<COUNT/2 ; i++, p++)
+	{
+		insert_data(&buffer_6,*p);
+	}
 	return 0;
 }
+
+int init_suite_clear(void)
+{
+    init_CB(&buffer_8, (COUNT));
+     int i;
+        
+	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
+	{
+		insert_data(&buffer_8,*p);
+	}
+	return 0;
+}
+
 /*Cleaning suite*/
 int clean_suite(void)
 {
@@ -63,74 +104,165 @@ int clean_suite(void)
 /*Adding test registry*/
 void test_init_CB() //suite1
 {
+        int i;
+        
+	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(insert_data(&buffer_1,*p),BUFFER_NOT_INITIALISED);
+	}
+      
+    for(p= parameter_value,i=0; i<COUNT ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(delete_data(&buffer_1),BUFFER_NOT_INITIALISED);
+	} 
 
-	CU_ASSERT_NOT_EQUAL(insert_data(&buffer,'0'),1);
-	CU_ASSERT_NOT_EQUAL(delete_data(&buffer),1);
-	CU_ASSERT_NOT_EQUAL(report_data(&buffer),1);
-	CU_ASSERT_NOT_EQUAL(clear_buffer(&buffer),1);
-	CU_ASSERT_NOT_EQUAL(resize_CB(&buffer, 3),1);
+	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(report_data(&buffer_1),BUFFER_NOT_INITIALISED);
+	}
 
-	CU_ASSERT_EQUAL(init_CB(&buffer, 3), 1);
-	CU_ASSERT_NOT_EQUAL(init_CB(&buffer, -1), 1);
-	CU_ASSERT_NOT_EQUAL(init_CB(&buffer, 0), 1);
+	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(clear_buffer(&buffer_1),BUFFER_NOT_INITIALISED);
+	}
+
+	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(resize_CB(&buffer_1,*p),BUFFER_NOT_INITIALISED);
+	}
+
+	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(init_CB(&buffer_1,*p),SUCCESS);
+	}
+        
+	CU_ASSERT_EQUAL(init_CB(&buffer_1, -1), ERROR);
+	CU_ASSERT_EQUAL(init_CB(&buffer_1, 0), ERROR);
 
 
 }
 
 void test_insert_data() //suite2
 {
-	CU_ASSERT_EQUAL(insert_data(&buffer, 'A'),1);
-	CU_ASSERT_EQUAL(insert_data(&buffer, '0'),1);
-	CU_ASSERT_EQUAL(insert_data(&buffer, '&'),1);
-	CU_ASSERT_EQUAL(insert_data(&buffer, ','),1);
-	CU_ASSERT_EQUAL(insert_data(&buffer, '\n'),1);
-	CU_ASSERT_EQUAL(insert_data(&buffer, ' '),1);
-	CU_ASSERT_EQUAL(insert_data(&buffer, 'z'),1);
-	CU_ASSERT_EQUAL(insert_data(&buffer, '\\'),1);
+	int i;
+    for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
+	{
+		if(i < (COUNT)/2)
+		{
+			CU_ASSERT_EQUAL(insert_data(&buffer_2,*p),SUCCESS);
 
+		}
+		else
+		{
 
+			CU_ASSERT_EQUAL(insert_data(&buffer_2,*p),-4);
+		}
+	}
+	
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, '0'),SUCCESS);
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, '&'),SUCCESS);
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, ','),SUCCESS);
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, '\n'),SUCCESS);
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, ' '),SUCCESS);
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, 'z'),SUCCESS);
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, '\\'),SUCCESS); 
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, 5),SUCCESS); 
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, 0),SUCCESS);      
+    
 
-	CU_ASSERT_NOT_EQUAL(insert_data(&buffer, '5'),1);
-	CU_ASSERT_NOT_EQUAL(insert_data(&buffer, 'a'),1);
+	CU_ASSERT_EQUAL(insert_data(&buffer_3, 0),SUCCESS);  
 
+	CU_ASSERT_EQUAL(delete_data(&buffer_2), SUCCESS);
+	CU_ASSERT_EQUAL(delete_data(&buffer_3), SUCCESS);
+
+  
+   
 }
 
 void test_delete_data() //suite3
 {
 
-    CU_ASSERT_EQUAL(delete_data(&buffer),1);
-    CU_ASSERT_NOT_EQUAL(delete_data(&buffer),1);
+	int i;
+	for(i=0; i<COUNT ; i++)
+	{
+		if(i == 0)
+		{
+			CU_ASSERT_EQUAL(delete_data(&buffer_4),SUCCESS);
+		}
+		else
+		{
+			CU_ASSERT_EQUAL(delete_data(&buffer_4),BUFFER_NOT_INITIALISED);
+		}
+	}
+
 }
 
-void test_report_data() //suite4
+void test_pop_and_report_data() //suite4
 {
+	int i;
+  	for(p= parameter_value,i=0; i<(COUNT/2) ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(insert_data(&buffer_5,*p),SUCCESS);
+	}
 
-    CU_ASSERT_EQUAL(report_data(&buffer),1);
-	CU_ASSERT_EQUAL(delete_data(&buffer),1);
-    CU_ASSERT_EQUAL(report_data(&buffer), 1);
-   	CU_ASSERT_EQUAL(delete_data(&buffer),1);
-	CU_ASSERT_NOT_EQUAL(report_data(&buffer), 1);
+	for(i=0; i<(COUNT/2) ; i++)
+	{
+		
+		CU_ASSERT_EQUAL(report_data(&buffer_5),SUCCESS);
+	}
 
+	for(i=0; i<(COUNT/2) ; i++)
+	{
+		
+			CU_ASSERT_EQUAL(pop_data(&buffer_5, &data_pop),SUCCESS);
+	}
+
+	for(i=0; i<(COUNT/2) ; i++)
+	{
+		
+		CU_ASSERT_EQUAL(report_data(&buffer_5),EMPTY);
+	}
+
+	for(i=0; i<(COUNT/2) ; i++)
+	{
+		
+			CU_ASSERT_EQUAL(pop_data(&buffer_5, &data_pop),EMPTY);
+	}
+	
+
+	CU_ASSERT_EQUAL(delete_data(&buffer_5),SUCCESS);
 }
 
 void test_resize_CB() //suite5
 {
+	int i;
+     for(p= parameter_value,i=0; i<(COUNT/2) ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(insert_data(&buffer_6,*p),-4);
+	}
 
-	CU_ASSERT_NOT_EQUAL(insert_data(&buffer,'A'),1);
-	CU_ASSERT_EQUAL(resize_CB(&buffer,1),1);
-	CU_ASSERT_EQUAL(insert_data(&buffer,'B'),1);
-	CU_ASSERT_NOT_EQUAL(insert_data(&buffer,'B'),1);
+	CU_ASSERT_EQUAL(resize_CB(&buffer_6,COUNT/2),SUCCESS);
 
-	CU_ASSERT_NOT_EQUAL(resize_CB(&buffer,-2),1);
-	CU_ASSERT_NOT_EQUAL(resize_CB(&buffer,0),1);
+	 for(p= parameter_value,i=0; i<(COUNT/2) ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(insert_data(&buffer_6,*p),SUCCESS);
+	}
+
+	CU_ASSERT_EQUAL(resize_CB(&buffer_7,-2),ERROR);
+	CU_ASSERT_EQUAL(resize_CB(&buffer_7,0),ERROR);
+
+	CU_ASSERT_EQUAL(delete_data(&buffer_6),SUCCESS);
+	CU_ASSERT_EQUAL(delete_data(&buffer_7),SUCCESS);
+
+
 
 }
 
 void test_clear_buffer() //suite5
 {
 
-    CU_ASSERT_EQUAL(clear_buffer(&buffer),1);
-    CU_ASSERT_NOT_EQUAL(clear_buffer(&buffer),1);
+   CU_ASSERT_EQUAL(clear_buffer(&buffer_8),SUCCESS);
+   //CU_ASSERT_EQUAL(clear_buffer(&buffer_8),EMPTY);
 
 }
 
@@ -165,7 +297,7 @@ int main(void)
 	CU_pSuite pSuite2 = NULL;
     
  	/* add a suite to the registry */
- 	pSuite2 = CU_add_suite("Suite_2", init_suite_insert_data, clean_suite);
+ 	pSuite2 = CU_add_suite("Suite_2", init, clean_suite);
     if (NULL == pSuite2)
     {
 	 	CU_cleanup_registry();
@@ -185,7 +317,7 @@ int main(void)
     
 
  	/* add a suite to the registry */
- 	pSuite3 = CU_add_suite("Suite_3", init_suite_delete_data, clean_suite);
+ 	pSuite3 = CU_add_suite("Suite_3", init_delete, clean_suite);
     if (NULL == pSuite3)
     {
 		CU_cleanup_registry();
@@ -209,7 +341,7 @@ int main(void)
 		CU_cleanup_registry();
 	    return CU_get_error();
 	}
-	if ((NULL == CU_add_test(pSuite4, "test of fprintf()", test_report_data)))
+	if ((NULL == CU_add_test(pSuite4, "test of fprintf()", test_pop_and_report_data)))
 	{
 	        CU_cleanup_registry();
 	        return CU_get_error();
@@ -220,7 +352,7 @@ int main(void)
     
 
  	/* add a suite to the registry */
- 	pSuite5 = CU_add_suite("Suite_5", init_suite_resize_and_clean, clean_suite);
+ 	pSuite5 = CU_add_suite("Suite_5", init_suite_resize, clean_suite);
     if (NULL == pSuite5)
     {
 		CU_cleanup_registry();
@@ -233,7 +365,19 @@ int main(void)
 	        return CU_get_error();
 	}
 
-	if ((NULL == CU_add_test(pSuite5, "test of fprintf()", test_clear_buffer)))
+/***************************************************************************/
+
+	CU_pSuite pSuite6 = NULL;
+    
+
+ 	/* add a suite to the registry */
+ 	pSuite6 = CU_add_suite("Suite_6", init_suite_clear, clean_suite);
+    if (NULL == pSuite6)
+    {
+		CU_cleanup_registry();
+	    return CU_get_error();
+	}
+	if ((NULL == CU_add_test(pSuite6, "test of fprintf()", test_clear_buffer)))
 	{
 	        CU_cleanup_registry();
 	        return CU_get_error();
@@ -241,6 +385,7 @@ int main(void)
 
 /***************************************************************************/
     /* Run all tests using the CUnit Basic interface */
+    random_generator(2);
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();
 	CU_cleanup_registry();

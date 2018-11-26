@@ -48,7 +48,11 @@ status init_CB(CB *buffer,int32_t length)
 		(buffer->flag_init) = 1;
 		for(int i=1; i<=length;i++)
 		{
-			insert_link(buffer);
+			if((insert_link(buffer)) == ERROR)
+			{
+				PRINT("No space to allocate\r\n");
+				return ERROR;
+			}
         }
     }
     (buffer->front_CB) = (buffer->head);

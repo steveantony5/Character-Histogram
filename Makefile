@@ -65,7 +65,7 @@ project2 :$(OBJS)
 	-$(CC) $(CFLAGS) -o project2 $(OBJS)
 
 unit: 
-	gcc -Wall -o unit unittest1.c src/delete_data.o src/insert_link.o src/insert_data.o src/clear_buffer.o src/resize_CB.o src/init_CB.o src/report_data.o -lcunit
+	gcc -Wall -o unit unittest1.c src/delete_data.o src/insert_link.o src/insert_data.o src/clear_buffer.o src/resize_CB.o src/init_CB.o src/report_data.o src/pop_data.o -lcunit
 
 clean:
 	-rm *.o project2

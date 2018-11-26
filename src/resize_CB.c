@@ -40,7 +40,11 @@ status resize_CB(CB *buffer, int32_t elements_to_add)
 	{
 		for(int i=1; i<=elements_to_add;i++)
 		{
-			insert_link(buffer);
+			if((insert_link(buffer)) == ERROR)
+			{
+				PRINT("No space in memoryr\n");
+				return ERROR;
+			}
         }
     }
 	return SUCCESS;

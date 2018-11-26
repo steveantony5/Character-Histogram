@@ -32,16 +32,17 @@ status delete_data(CB *buffer)
 		PRINT("Buffer not initialized\r\n");
 		return BUFFER_NOT_INITIALISED;
 	}
-	else if(IsEMPTY(buffer))
-	{
-		PRINT("Nothing to delete: Buffer is empty\r\n");
-		return EMPTY;
 
-	}
 	else
 	{
-		(buffer->front_CB) = ((buffer->front_CB) -> link);
-		(buffer->length_CB)--;
+		free(buffer->head);
+		free(buffer->tail);
+		free(buffer->front_CB);
+		free(buffer->rear_CB);
+		(buffer->head) = NULL;
+		(buffer->tail) = NULL;
+		(buffer->front_CB) = NULL;
+		(buffer->rear_CB) = NULL;
 		PRINT("Deleted successfully\r\n");
 		return SUCCESS;
 	}
