@@ -15,6 +15,11 @@
 
 #define UART0_BAUD_RATE             (57600) //115200
 //declare rx_buffer and tx_buffer for data manipulation
+extern int8_t RX_received;
+extern int count;
+extern uint8_t data_pop;
+extern uint32_t database[256] ;
+extern int8_t flag_report;
 
 void uartinit()
 {
@@ -45,7 +50,8 @@ void uartinit()
 			UART0_BDH &= ~UART0_BDH_SBR_MASK;
 			UART0_BDL &= ~UART0_BDL_SBR_MASK;
 
-			baudmoddivisor= (uint16_t)((SystemCoreClock)/(UART0_BAUD_RATE *16));
+			//baudmoddivisor= (uint16_t)((SystemCoreClock)/(UART0_BAUD_RATE *16));
+			baudmoddivisor = 12;
 			UART0_BDH |= UARTLP_BDH_SBR((baudmoddivisor >> 8)) ;
 			UART0_BDL |= UARTLP_BDL_SBR(baudmoddivisor);
 
@@ -88,29 +94,18 @@ void send_to_console(uint8_t data)
 
 }
 
-status receive_from_console()
-{
-	uint8_t data;
-	status value;
-
-
-	data = UART0_D;
-#ifdef DEBUG
-	send_to_console_str("Inserting\r\n");
-	send_to_console(data);
-	send_to_console_str("\r\n");
-#endif
-	send_to_console(data);
-	value =	insert_data(&RX_buffer, data);
-	if(value == ERROR)
-		return ERROR;
-
-}
 void UART0_IRQHandler()
 {
 	if((UART0_S1) & (UART0_S1_RDRF_MASK))
 		{
-			receive_from_console();
+
+		insert_data(&RX_buffer, UART0_D);
+					pop_data(&RX_buffer,&data_pop);
+
+					database[data_pop] = database[data_pop] + 1;
+					RX_received = 0;
+
+					sys_reload();
 		}
 }
 
