@@ -145,11 +145,11 @@ void SysTick_Handler(void)
 	{
 		if(database[i]!= 0)
 		{
-			sprintf(num," %c - %d \r\n",i,database[i]);
+			sprintf(num," %c - %lu \r\n",i,database[i]);
 			PRINT(num);
 		}
 	}
-	sprintf(prime_print,"%d ",prime_number);
+	sprintf(prime_print,"%lu ",prime_number);
 
 	for(int i=1; i<=5; i++)
 	{

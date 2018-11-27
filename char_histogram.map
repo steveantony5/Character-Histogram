@@ -1,24 +1,28 @@
 Archive member included to satisfy reference by file (symbol)
 
-/usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
-                              /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o (__libc_csu_init)
+/usr/arm-linux-gnueabihf/lib/libc_nonshared.a(elf-init.oS)
+                              /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o (__libc_csu_init)
+
+As-needed library included to satisfy reference by file (symbol)
+
+ld-linux-armhf.so.3           ./main.o (__stack_chk_guard@@GLIBC_2.4)
 
 Allocating common symbols
 Common symbol       size              file
 
 num                 0x14              ./main.o
-RX_buffer           0x30              ./src/delete_CB.o
+RX_buffer           0x1c              ./src/delete_CB.o
 prime_number        0x4               ./main.o
 prime_print         0x1e              ./main.o
 
 Discarded input sections
 
  .note.GNU-stack
-                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+                0x0000000000000000        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
  .note.GNU-stack
-                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o
+                0x0000000000000000        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crti.o
  .note.GNU-stack
-                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
+                0x0000000000000000        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
  .note.GNU-stack
                 0x0000000000000000        0x0 ./src/delete_CB.o
  .note.GNU-stack
@@ -38,11 +42,11 @@ Discarded input sections
  .note.GNU-stack
                 0x0000000000000000        0x0 ./main.o
  .note.GNU-stack
-                0x0000000000000000        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
+                0x0000000000000000        0x0 /usr/arm-linux-gnueabihf/lib/libc_nonshared.a(elf-init.oS)
  .note.GNU-stack
-                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o
+                0x0000000000000000        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
  .note.GNU-stack
-                0x0000000000000000        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+                0x0000000000000000        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crtn.o
 
 Memory Configuration
 
@@ -51,9 +55,9 @@ Name             Origin             Length             Attributes
 
 Linker script and memory map
 
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crti.o
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
 LOAD ./src/delete_CB.o
 LOAD ./src/init_CB.o
 LOAD ./src/insert_data.o
@@ -63,224 +67,228 @@ LOAD ./src/report_data.o
 LOAD ./src/clear_buffer.o
 LOAD ./src/pop_data.o
 LOAD ./main.o
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/libgcc.a
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/libgcc_s.so
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/libgcc.a
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/libgcc_s.so
 START GROUP
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/libgcc_s.so.1
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/libgcc.a
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/libgcc_s.so.1
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/libgcc.a
 END GROUP
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/libc.so
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/libc.so
 START GROUP
-LOAD /lib/x86_64-linux-gnu/libc.so.6
-LOAD /usr/lib/x86_64-linux-gnu/libc_nonshared.a
-LOAD /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+LOAD /usr/arm-linux-gnueabihf/lib/libc.so.6
+LOAD /usr/arm-linux-gnueabihf/lib/libc_nonshared.a
+LOAD /usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3
 END GROUP
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/libgcc.a
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/libgcc_s.so
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/libgcc.a
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/libgcc_s.so
 START GROUP
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/libgcc_s.so.1
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/libgcc.a
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/libgcc_s.so.1
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/libgcc.a
 END GROUP
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o
-LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
-                [!provide]                        PROVIDE (__executable_start, SEGMENT_START ("text-segment", 0x0))
-                0x0000000000000238                . = (SEGMENT_START ("text-segment", 0x0) + SIZEOF_HEADERS)
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
+LOAD /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crtn.o
+                [!provide]                        PROVIDE (__executable_start, SEGMENT_START ("text-segment", 0x10000))
+                0x0000000000010154                . = (SEGMENT_START ("text-segment", 0x10000) + SIZEOF_HEADERS)
 
-.interp         0x0000000000000238       0x1c
+.interp         0x0000000000010154       0x19
  *(.interp)
- .interp        0x0000000000000238       0x1c /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ .interp        0x0000000000010154       0x19 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
-.note.ABI-tag   0x0000000000000254       0x20
- .note.ABI-tag  0x0000000000000254       0x20 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+.note.ABI-tag   0x0000000000010170       0x20
+ .note.ABI-tag  0x0000000000010170       0x20 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
 .note.gnu.build-id
-                0x0000000000000274       0x24
+                0x0000000000010190       0x24
  *(.note.gnu.build-id)
  .note.gnu.build-id
-                0x0000000000000274       0x24 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+                0x0000000000010190       0x24 linker stubs
 
 .hash
  *(.hash)
 
-.gnu.hash       0x0000000000000298       0x1c
+.gnu.hash       0x00000000000101b4       0x44
  *(.gnu.hash)
- .gnu.hash      0x0000000000000298       0x1c /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ .gnu.hash      0x00000000000101b4       0x44 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
-.dynsym         0x00000000000002b8      0x108
+.dynsym         0x00000000000101f8       0xa0
  *(.dynsym)
- .dynsym        0x00000000000002b8      0x108 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ .dynsym        0x00000000000101f8       0xa0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
-.dynstr         0x00000000000003c0       0xb0
+.dynstr         0x0000000000010298       0x8b
  *(.dynstr)
- .dynstr        0x00000000000003c0       0xb0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ .dynstr        0x0000000000010298       0x8b /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
-.gnu.version    0x0000000000000470       0x16
+.gnu.version    0x0000000000010324       0x14
  *(.gnu.version)
- .gnu.version   0x0000000000000470       0x16 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ .gnu.version   0x0000000000010324       0x14 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
-.gnu.version_d  0x0000000000000488        0x0
+.gnu.version_d  0x0000000000010338        0x0
  *(.gnu.version_d)
  .gnu.version_d
-                0x0000000000000488        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+                0x0000000000010338        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
-.gnu.version_r  0x0000000000000488       0x30
+.gnu.version_r  0x0000000000010338       0x40
  *(.gnu.version_r)
  .gnu.version_r
-                0x0000000000000488       0x30 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+                0x0000000000010338       0x40 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
-.rela.dyn       0x00000000000004b8       0xc0
+.rel.dyn        0x0000000000010378       0x10
+ *(.rel.init)
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+ *(.rel.fini)
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+ *(.rel.data.rel.ro .rel.data.rel.ro.* .rel.gnu.linkonce.d.rel.ro.*)
+ .rel.data.rel.ro
+                0x0000000000010378        0x8 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+ *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
+ *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
+ *(.rel.ctors)
+ *(.rel.dtors)
+ *(.rel.got)
+ .rel.got       0x0000000000010380        0x8 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+ *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
+ .rel.bss       0x0000000000010388        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                [!provide]                        PROVIDE (__rel_iplt_start, .)
+ *(.rel.iplt)
+ .rel.iplt      0x0000000000010388        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                [!provide]                        PROVIDE (__rel_iplt_end, .)
+
+.rela.dyn       0x0000000000010388        0x0
  *(.rela.init)
  *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
- .rela.text     0x00000000000004b8        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
  *(.rela.fini)
  *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
  *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
- .rela.data.rel.ro
-                0x00000000000004b8        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
- .rela.data.rel.local
-                0x00000000000004b8       0x18 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
  *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
  *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
  *(.rela.ctors)
  *(.rela.dtors)
  *(.rela.got)
- .rela.got      0x00000000000004d0       0x78 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
  *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
- .rela.bss      0x0000000000000548        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
- *(.rela.ldata .rela.ldata.* .rela.gnu.linkonce.l.*)
- *(.rela.lbss .rela.lbss.* .rela.gnu.linkonce.lb.*)
- *(.rela.lrodata .rela.lrodata.* .rela.gnu.linkonce.lr.*)
- *(.rela.ifunc)
- .rela.ifunc    0x0000000000000548        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
- .rela.fini_array
-                0x0000000000000548       0x18 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
- .rela.init_array
-                0x0000000000000560       0x18 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-
-.rela.plt       0x0000000000000578       0x78
- *(.rela.plt)
- .rela.plt      0x0000000000000578       0x78 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
                 [!provide]                        PROVIDE (__rela_iplt_start, .)
  *(.rela.iplt)
                 [!provide]                        PROVIDE (__rela_iplt_end, .)
 
-.init           0x00000000000005f0       0x17
+.rel.plt        0x0000000000010388       0x40
+ *(.rel.plt)
+ .rel.plt       0x0000000000010388       0x40 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+
+.rela.plt
+ *(.rela.plt)
+
+.init           0x00000000000103c8        0xc
  *(SORT(.init))
- .init          0x00000000000005f0       0x12 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o
-                0x00000000000005f0                _init
- .init          0x0000000000000602        0x5 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+ .init          0x00000000000103c8        0x8 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crti.o
+                0x00000000000103c8                _init
+ .init          0x00000000000103d0        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crtn.o
 
-.plt            0x0000000000000610       0x60
+.plt            0x00000000000103d4       0x74
  *(.plt)
- .plt           0x0000000000000610       0x60 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ .plt           0x00000000000103d4       0x74 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                0x00000000000103e8                printf@@GLIBC_2.4
+                0x00000000000103f4                free@@GLIBC_2.4
+                0x0000000000010400                __stack_chk_fail@@GLIBC_2.4
+                0x000000000001040c                puts@@GLIBC_2.4
+                0x0000000000010418                malloc@@GLIBC_2.4
+                0x0000000000010424                __libc_start_main@@GLIBC_2.4
+                0x000000000001043c                abort@@GLIBC_2.4
+
+.iplt           0x0000000000010448        0x0
  *(.iplt)
+ .iplt          0x0000000000010448        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
 
-.plt.got        0x0000000000000670        0x8
- *(.plt.got)
- .plt.got       0x0000000000000670        0x8 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-
-.plt.sec
- *(.plt.sec)
-
-.text           0x0000000000000680      0x832
+.text           0x0000000000010448      0x638
  *(.text.unlikely .text.*_unlikely .text.unlikely.*)
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
  *(.text.hot .text.hot.*)
  *(.text .stub .text.* .gnu.linkonce.t.*)
- .text          0x0000000000000680       0x2b /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-                0x0000000000000680                _start
- .text          0x00000000000006ab        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o
- *fill*         0x00000000000006ab        0x5 
- .text          0x00000000000006b0       0xda /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
- .text          0x000000000000078a       0xac ./src/delete_CB.o
-                0x000000000000078a                delete_CB
- .text          0x0000000000000836      0x119 ./src/init_CB.o
-                0x0000000000000836                init_CB
-                0x0000000000000906                IsFULL
-                0x000000000000092e                IsEMPTY
- .text          0x000000000000094f       0xe9 ./src/insert_data.o
-                0x000000000000094f                insert_data
- .text          0x0000000000000a38       0xbd ./src/insert_link.o
-                0x0000000000000a38                insert_link
- .text          0x0000000000000af5       0x7b ./src/resize_CB.o
-                0x0000000000000af5                resize_CB
- .text          0x0000000000000b70       0xe4 ./src/report_data.o
-                0x0000000000000b70                report_data
- .text          0x0000000000000c54       0x8b ./src/clear_buffer.o
-                0x0000000000000c54                clear_buffer
- .text          0x0000000000000cdf       0x93 ./src/pop_data.o
-                0x0000000000000cdf                pop_data
- .text          0x0000000000000d72       0xc8 ./main.o
-                0x0000000000000d72                main
- *fill*         0x0000000000000e3a        0x6 
- .text          0x0000000000000e40       0x72 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
-                0x0000000000000e40                __libc_csu_init
-                0x0000000000000eb0                __libc_csu_fini
- .text          0x0000000000000eb2        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o
- .text          0x0000000000000eb2        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+ .text          0x0000000000010448       0x30 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                0x0000000000010448                _start
+ .text          0x0000000000010478       0x24 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crti.o
+ .text          0x000000000001049c       0x90 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
+ .text          0x000000000001052c       0x7a ./src/delete_CB.o
+                0x000000000001052c                delete_CB
+ .text          0x00000000000105a6       0xdc ./src/init_CB.o
+                0x00000000000105a6                init_CB
+                0x000000000001063a                IsFULL
+                0x0000000000010660                IsEMPTY
+ .text          0x0000000000010682       0xa6 ./src/insert_data.o
+                0x0000000000010682                insert_data
+ .text          0x0000000000010728       0x74 ./src/insert_link.o
+                0x0000000000010728                insert_link
+ .text          0x000000000001079c       0x70 ./src/resize_CB.o
+                0x000000000001079c                resize_CB
+ .text          0x000000000001080c       0xae ./src/report_data.o
+                0x000000000001080c                report_data
+ .text          0x00000000000108ba       0x6e ./src/clear_buffer.o
+                0x00000000000108ba                clear_buffer
+ .text          0x0000000000010928       0x72 ./src/pop_data.o
+                0x0000000000010928                pop_data
+ .text          0x000000000001099a       0xa4 ./main.o
+                0x000000000001099a                main
+ *fill*         0x0000000000010a3e        0x2 
+ .text          0x0000000000010a40       0x40 /usr/arm-linux-gnueabihf/lib/libc_nonshared.a(elf-init.oS)
+                0x0000000000010a40                __libc_csu_init
+                0x0000000000010a7c                __libc_csu_fini
+ .text          0x0000000000010a80        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
+ .text          0x0000000000010a80        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crtn.o
  *(.gnu.warning)
+ *(.glue_7t)
+ .glue_7t       0x0000000000010a80        0x0 linker stubs
+ *(.glue_7)
+ .glue_7        0x0000000000010a80        0x0 linker stubs
+ *(.vfp11_veneer)
+ .vfp11_veneer  0x0000000000010a80        0x0 linker stubs
+ *(.v4_bx)
+ .v4_bx         0x0000000000010a80        0x0 linker stubs
 
-.fini           0x0000000000000eb4        0x9
+.fini           0x0000000000010a80        0x8
  *(SORT(.fini))
- .fini          0x0000000000000eb4        0x4 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o
-                0x0000000000000eb4                _fini
- .fini          0x0000000000000eb8        0x5 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+ .fini          0x0000000000010a80        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crti.o
+                0x0000000000010a80                _fini
+ .fini          0x0000000000010a84        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crtn.o
                 [!provide]                        PROVIDE (__etext, .)
                 [!provide]                        PROVIDE (_etext, .)
                 [!provide]                        PROVIDE (etext, .)
 
-.rodata         0x0000000000000ec0      0x1a1
+.rodata         0x0000000000010a88      0x1ad
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata.cst4   0x0000000000000ec0        0x4 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-                0x0000000000000ec0                _IO_stdin_used
- .rodata        0x0000000000000ec4       0x2e ./src/delete_CB.o
- .rodata        0x0000000000000ef2       0x16 ./src/init_CB.o
- .rodata        0x0000000000000f08       0x3c ./src/insert_data.o
- .rodata        0x0000000000000f44       0x2c ./src/resize_CB.o
- .rodata        0x0000000000000f70       0x68 ./src/report_data.o
- .rodata        0x0000000000000fd8       0x4f ./src/clear_buffer.o
- *fill*         0x0000000000001027        0x1 
- .rodata        0x0000000000001028       0x39 ./src/pop_data.o
+ .rodata.cst4   0x0000000000010a88        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                0x0000000000010a88                _IO_stdin_used
+ .rodata        0x0000000000010a8c       0x2e ./src/delete_CB.o
+ *fill*         0x0000000000010aba        0x2 
+ .rodata        0x0000000000010abc       0x16 ./src/init_CB.o
+ *fill*         0x0000000000010ad2        0x2 
+ .rodata        0x0000000000010ad4       0x3f ./src/insert_data.o
+ *fill*         0x0000000000010b13        0x1 
+ .rodata        0x0000000000010b14       0x2c ./src/resize_CB.o
+ .rodata        0x0000000000010b40       0x6a ./src/report_data.o
+ *fill*         0x0000000000010baa        0x2 
+ .rodata        0x0000000000010bac       0x50 ./src/clear_buffer.o
+ .rodata        0x0000000000010bfc       0x39 ./src/pop_data.o
 
 .rodata1
  *(.rodata1)
 
-.eh_frame_hdr   0x0000000000001064       0x8c
+.ARM.extab      0x0000000000010c35        0x0
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+ .ARM.extab     0x0000000000010c35        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                [!provide]                        PROVIDE (__exidx_start, .)
+
+.ARM.exidx      0x0000000000010c38        0x8
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx     0x0000000000010c38        0x8 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                [!provide]                        PROVIDE (__exidx_end, .)
+
+.eh_frame_hdr
  *(.eh_frame_hdr)
- .eh_frame_hdr  0x0000000000001064       0x8c /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-                0x0000000000001064                __GNU_EH_FRAME_HDR
  *(.eh_frame_entry .eh_frame_entry.*)
 
-.eh_frame       0x00000000000010f0      0x248
+.eh_frame       0x0000000000010c40        0x4
  *(.eh_frame)
- .eh_frame      0x00000000000010f0       0x30 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-                                         0x2c (size before relaxing)
- *fill*         0x0000000000001120        0x0 
- .eh_frame      0x0000000000001120       0x40 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
- .eh_frame      0x0000000000001160       0x18 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-                                         0x30 (size before relaxing)
- .eh_frame      0x0000000000001178       0x20 ./src/delete_CB.o
-                                         0x38 (size before relaxing)
- .eh_frame      0x0000000000001198       0x60 ./src/init_CB.o
-                                         0x78 (size before relaxing)
- .eh_frame      0x00000000000011f8       0x20 ./src/insert_data.o
-                                         0x38 (size before relaxing)
- .eh_frame      0x0000000000001218       0x20 ./src/insert_link.o
-                                         0x38 (size before relaxing)
- .eh_frame      0x0000000000001238       0x20 ./src/resize_CB.o
-                                         0x38 (size before relaxing)
- .eh_frame      0x0000000000001258       0x20 ./src/report_data.o
-                                         0x38 (size before relaxing)
- .eh_frame      0x0000000000001278       0x20 ./src/clear_buffer.o
-                                         0x38 (size before relaxing)
- .eh_frame      0x0000000000001298       0x20 ./src/pop_data.o
-                                         0x38 (size before relaxing)
- .eh_frame      0x00000000000012b8       0x20 ./main.o
-                                         0x38 (size before relaxing)
- .eh_frame      0x00000000000012d8       0x5c /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
-                                         0x78 (size before relaxing)
- .eh_frame      0x0000000000001334        0x4 /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o
+ .eh_frame      0x0000000000010c40        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
  *(.eh_frame.*)
 
 .gcc_except_table
@@ -291,7 +299,7 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
 
 .exception_ranges
  *(.exception_ranges .exception_ranges*)
-                0x0000000000201d98                . = DATA_SEGMENT_ALIGN (CONSTANT (MAXPAGESIZE), CONSTANT (COMMONPAGESIZE))
+                0x0000000000020f00                . = DATA_SEGMENT_ALIGN (CONSTANT (MAXPAGESIZE), CONSTANT (COMMONPAGESIZE))
 
 .eh_frame
  *(.eh_frame)
@@ -313,23 +321,23 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
  *(.tbss .tbss.* .gnu.linkonce.tb.*)
  *(.tcommon)
 
-.preinit_array  0x0000000000201d98        0x0
+.preinit_array  0x0000000000020f00        0x0
                 [!provide]                        PROVIDE (__preinit_array_start, .)
  *(.preinit_array)
                 [!provide]                        PROVIDE (__preinit_array_end, .)
 
-.init_array     0x0000000000201d98        0x8
-                0x0000000000201d98                PROVIDE (__init_array_start, .)
+.init_array     0x0000000000020f00        0x4
+                0x0000000000020f00                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*) SORT(.ctors.*))
  *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
- .init_array    0x0000000000201d98        0x8 /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
-                0x0000000000201da0                PROVIDE (__init_array_end, .)
+ .init_array    0x0000000000020f00        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
+                0x0000000000020f04                PROVIDE (__init_array_end, .)
 
-.fini_array     0x0000000000201da0        0x8
+.fini_array     0x0000000000020f04        0x4
                 [!provide]                        PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*) SORT(.dtors.*))
  *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
- .fini_array    0x0000000000201da0        0x8 /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
+ .fini_array    0x0000000000020f04        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end, .)
 
 .ctors
@@ -349,114 +357,107 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
 .jcr
  *(.jcr)
 
-.data.rel.ro    0x0000000000201da8        0x0
+.data.rel.ro    0x0000000000020f08        0x4
  *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
  *(.data.rel.ro .data.rel.ro.* .gnu.linkonce.d.rel.ro.*)
- .data.rel.ro   0x0000000000201da8        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ *fill*         0x0000000000020f08        0x0 
+ .data.rel.ro   0x0000000000020f08        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                0x0000000000020f08                __stack_chk_guard@@GLIBC_2.4
 
-.dynamic        0x0000000000201da8      0x1f0
+.dynamic        0x0000000000020f0c       0xf0
  *(.dynamic)
- .dynamic       0x0000000000201da8      0x1f0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-                0x0000000000201da8                _DYNAMIC
+ .dynamic       0x0000000000020f0c       0xf0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                0x0000000000020f0c                _DYNAMIC
+                0x0000000000021000                . = DATA_SEGMENT_RELRO_END (., 0x0)
 
-.got            0x0000000000201f98       0x68
+.got            0x0000000000021000       0x30
  *(.got.plt)
- .got.plt       0x0000000000201f98       0x40 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-                0x0000000000201f98                _GLOBAL_OFFSET_TABLE_
+ .got.plt       0x0000000000021000       0x2c /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                0x0000000000021000                _GLOBAL_OFFSET_TABLE_
  *(.igot.plt)
+ .igot.plt      0x000000000002102c        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
  *(.got)
- .got           0x0000000000201fd8       0x28 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ .got           0x000000000002102c        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
  *(.igot)
-                0x0000000000202000                . = DATA_SEGMENT_RELRO_END (., 0x0)
 
-.data           0x0000000000202000       0x10
+.data           0x0000000000021030        0x8
+                [!provide]                        PROVIDE (__data_start, .)
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x0000000000202000        0x4 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
-                0x0000000000202000                data_start
-                0x0000000000202000                __data_start
- .data          0x0000000000202004        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o
- .data          0x0000000000202004        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
- *fill*         0x0000000000202004        0x4 
- .data.rel.local
-                0x0000000000202008        0x8 /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
-                0x0000000000202008                __dso_handle
- .data          0x0000000000202010        0x0 ./src/delete_CB.o
- .data          0x0000000000202010        0x0 ./src/init_CB.o
- .data          0x0000000000202010        0x0 ./src/insert_data.o
- .data          0x0000000000202010        0x0 ./src/insert_link.o
- .data          0x0000000000202010        0x0 ./src/resize_CB.o
- .data          0x0000000000202010        0x0 ./src/report_data.o
- .data          0x0000000000202010        0x0 ./src/clear_buffer.o
- .data          0x0000000000202010        0x0 ./src/pop_data.o
- .data          0x0000000000202010        0x0 ./main.o
- .data          0x0000000000202010        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
- .data          0x0000000000202010        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o
- .data          0x0000000000202010        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+ .data          0x0000000000021030        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+                0x0000000000021030                data_start
+                0x0000000000021030                __data_start
+ .data          0x0000000000021034        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crti.o
+ .data          0x0000000000021034        0x4 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
+                0x0000000000021034                __dso_handle
+ .data          0x0000000000021038        0x0 ./src/delete_CB.o
+ .data          0x0000000000021038        0x0 ./src/init_CB.o
+ .data          0x0000000000021038        0x0 ./src/insert_data.o
+ .data          0x0000000000021038        0x0 ./src/insert_link.o
+ .data          0x0000000000021038        0x0 ./src/resize_CB.o
+ .data          0x0000000000021038        0x0 ./src/report_data.o
+ .data          0x0000000000021038        0x0 ./src/clear_buffer.o
+ .data          0x0000000000021038        0x0 ./src/pop_data.o
+ .data          0x0000000000021038        0x0 ./main.o
+ .data          0x0000000000021038        0x0 /usr/arm-linux-gnueabihf/lib/libc_nonshared.a(elf-init.oS)
+ .data          0x0000000000021038        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
+ .data          0x0000000000021038        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crtn.o
 
 .tm_clone_table
-                0x0000000000202010        0x0
+                0x0000000000021038        0x0
  .tm_clone_table
-                0x0000000000202010        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
+                0x0000000000021038        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
  .tm_clone_table
-                0x0000000000202010        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o
+                0x0000000000021038        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
 
 .data1
  *(.data1)
-                0x0000000000202010                _edata = .
+                0x0000000000021038                _edata = .
                 [!provide]                        PROVIDE (edata, .)
-                0x0000000000202010                . = .
-                0x0000000000202010                __bss_start = .
+                0x0000000000021038                . = .
+                0x0000000000021038                __bss_start = .
+                0x0000000000021038                __bss_start__ = .
 
-.bss            0x0000000000202020      0x4b0
+.bss            0x0000000000021038      0x45c
  *(.dynbss)
- .dynbss        0x0000000000202020        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
+ .dynbss        0x0000000000021038        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
  *(.bss .bss.* .gnu.linkonce.b.*)
- .bss           0x0000000000202020        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o
- .bss           0x0000000000202020        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o
- .bss           0x0000000000202020        0x1 /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
- .bss           0x0000000000202021        0x0 ./src/delete_CB.o
- .bss           0x0000000000202021        0x0 ./src/init_CB.o
- .bss           0x0000000000202021        0x0 ./src/insert_data.o
- .bss           0x0000000000202021        0x0 ./src/insert_link.o
- .bss           0x0000000000202021        0x0 ./src/resize_CB.o
- .bss           0x0000000000202021        0x0 ./src/report_data.o
- .bss           0x0000000000202021        0x0 ./src/clear_buffer.o
- .bss           0x0000000000202021        0x0 ./src/pop_data.o
- *fill*         0x0000000000202021       0x1f 
- .bss           0x0000000000202040      0x401 ./main.o
-                0x0000000000202040                database
-                0x0000000000202440                data_pop
- .bss           0x0000000000202441        0x0 /usr/lib/x86_64-linux-gnu/libc_nonshared.a(elf-init.oS)
- .bss           0x0000000000202441        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o
- .bss           0x0000000000202441        0x0 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+ .bss           0x0000000000021038        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+ .bss           0x0000000000021038        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crti.o
+ .bss           0x0000000000021038        0x1 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
+ .bss           0x0000000000021039        0x0 ./src/delete_CB.o
+ .bss           0x0000000000021039        0x0 ./src/init_CB.o
+ .bss           0x0000000000021039        0x0 ./src/insert_data.o
+ .bss           0x0000000000021039        0x0 ./src/insert_link.o
+ .bss           0x0000000000021039        0x0 ./src/resize_CB.o
+ .bss           0x0000000000021039        0x0 ./src/report_data.o
+ .bss           0x0000000000021039        0x0 ./src/clear_buffer.o
+ .bss           0x0000000000021039        0x0 ./src/pop_data.o
+ *fill*         0x0000000000021039        0x3 
+ .bss           0x000000000002103c      0x401 ./main.o
+                0x000000000002103c                database
+                0x000000000002143c                data_pop
+ .bss           0x000000000002143d        0x0 /usr/arm-linux-gnueabihf/lib/libc_nonshared.a(elf-init.oS)
+ .bss           0x000000000002143d        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
+ .bss           0x000000000002143d        0x0 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crtn.o
  *(COMMON)
- *fill*         0x0000000000202441       0x1f 
- COMMON         0x0000000000202460       0x30 ./src/delete_CB.o
-                0x0000000000202460                RX_buffer
- COMMON         0x0000000000202490       0x3e ./main.o
-                0x0000000000202490                num
-                0x00000000002024a4                prime_number
-                0x00000000002024b0                prime_print
-                0x00000000002024d0                . = ALIGN ((. != 0x0)?0x8:0x1)
- *fill*         0x00000000002024ce        0x2 
-
-.lbss
- *(.dynlbss)
- *(.lbss .lbss.* .gnu.linkonce.lb.*)
- *(LARGE_COMMON)
-                0x00000000002024d0                . = ALIGN (0x8)
-                0x00000000002024d0                . = SEGMENT_START ("ldata-segment", .)
-
-.lrodata
- *(.lrodata .lrodata.* .gnu.linkonce.lr.*)
-
-.ldata          0x00000000006024d0        0x0
- *(.ldata .ldata.* .gnu.linkonce.l.*)
-                0x00000000006024d0                . = ALIGN ((. != 0x0)?0x8:0x1)
-                0x00000000006024d0                . = ALIGN (0x8)
-                0x00000000006024d0                _end = .
+ *fill*         0x000000000002143d        0x3 
+ COMMON         0x0000000000021440       0x1c ./src/delete_CB.o
+                0x0000000000021440                RX_buffer
+ COMMON         0x000000000002145c       0x36 ./main.o
+                0x000000000002145c                num
+                0x0000000000021470                prime_number
+                0x0000000000021474                prime_print
+                0x0000000000021494                . = ALIGN ((. != 0x0)?0x4:0x1)
+ *fill*         0x0000000000021492        0x2 
+                0x0000000000021494                _bss_end__ = .
+                0x0000000000021494                __bss_end__ = .
+                0x0000000000021494                . = ALIGN (0x4)
+                0x0000000000021494                . = SEGMENT_START ("ldata-segment", .)
+                0x0000000000021494                . = ALIGN (0x4)
+                0x0000000000021494                __end__ = .
+                0x0000000000021494                _end = .
                 [!provide]                        PROVIDE (end, .)
-                0x00000000006024d0                . = DATA_SEGMENT_END (.)
+                0x0000000000021494                . = DATA_SEGMENT_END (.)
 
 .stab
  *(.stab)
@@ -476,20 +477,53 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
 .stab.indexstr
  *(.stab.indexstr)
 
-.comment        0x0000000000000000       0x25
+.comment        0x0000000000000000       0x2a
  *(.comment)
- .comment       0x0000000000000000       0x25 /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o
-                                         0x26 (size before relaxing)
- .comment       0x0000000000000025       0x26 ./src/delete_CB.o
- .comment       0x0000000000000025       0x26 ./src/init_CB.o
- .comment       0x0000000000000025       0x26 ./src/insert_data.o
- .comment       0x0000000000000025       0x26 ./src/insert_link.o
- .comment       0x0000000000000025       0x26 ./src/resize_CB.o
- .comment       0x0000000000000025       0x26 ./src/report_data.o
- .comment       0x0000000000000025       0x26 ./src/clear_buffer.o
- .comment       0x0000000000000025       0x26 ./src/pop_data.o
- .comment       0x0000000000000025       0x26 ./main.o
- .comment       0x0000000000000025       0x26 /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o
+ .comment       0x0000000000000000       0x2a /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
+                                         0x2b (size before relaxing)
+ .comment       0x000000000000002a       0x2b ./src/delete_CB.o
+ .comment       0x000000000000002a       0x2b ./src/init_CB.o
+ .comment       0x000000000000002a       0x2b ./src/insert_data.o
+ .comment       0x000000000000002a       0x2b ./src/insert_link.o
+ .comment       0x000000000000002a       0x2b ./src/resize_CB.o
+ .comment       0x000000000000002a       0x2b ./src/report_data.o
+ .comment       0x000000000000002a       0x2b ./src/clear_buffer.o
+ .comment       0x000000000000002a       0x2b ./src/pop_data.o
+ .comment       0x000000000000002a       0x2b ./main.o
+ .comment       0x000000000000002a       0x2b /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
+
+.ARM.attributes
+                0x0000000000000000       0x35
+ .ARM.attributes
+                0x0000000000000000       0x33 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crt1.o
+ .ARM.attributes
+                0x0000000000000033       0x27 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crti.o
+ .ARM.attributes
+                0x000000000000005a       0x2a /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtbegin.o
+ .ARM.attributes
+                0x0000000000000084       0x3b ./src/delete_CB.o
+ .ARM.attributes
+                0x00000000000000bf       0x3b ./src/init_CB.o
+ .ARM.attributes
+                0x00000000000000fa       0x3b ./src/insert_data.o
+ .ARM.attributes
+                0x0000000000000135       0x3b ./src/insert_link.o
+ .ARM.attributes
+                0x0000000000000170       0x3b ./src/resize_CB.o
+ .ARM.attributes
+                0x00000000000001ab       0x3b ./src/report_data.o
+ .ARM.attributes
+                0x00000000000001e6       0x3b ./src/clear_buffer.o
+ .ARM.attributes
+                0x0000000000000221       0x3b ./src/pop_data.o
+ .ARM.attributes
+                0x000000000000025c       0x3b ./main.o
+ .ARM.attributes
+                0x0000000000000297       0x35 /usr/arm-linux-gnueabihf/lib/libc_nonshared.a(elf-init.oS)
+ .ARM.attributes
+                0x00000000000002cc       0x2a /usr/lib/gcc-cross/arm-linux-gnueabi/7/crtend.o
+ .ARM.attributes
+                0x00000000000002f6       0x27 /usr/lib/gcc-cross/arm-linux-gnueabi/7/../../../../arm-linux-gnueabi/lib/../libhf/crtn.o
 
 .debug
  *(.debug)
@@ -503,41 +537,41 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000      0x1b0
+.debug_aranges  0x0000000000000000      0x120
  *(.debug_aranges)
  .debug_aranges
-                0x0000000000000000       0x30 ./src/delete_CB.o
+                0x0000000000000000       0x20 ./src/delete_CB.o
  .debug_aranges
-                0x0000000000000030       0x30 ./src/init_CB.o
+                0x0000000000000020       0x20 ./src/init_CB.o
  .debug_aranges
-                0x0000000000000060       0x30 ./src/insert_data.o
+                0x0000000000000040       0x20 ./src/insert_data.o
  .debug_aranges
-                0x0000000000000090       0x30 ./src/insert_link.o
+                0x0000000000000060       0x20 ./src/insert_link.o
  .debug_aranges
-                0x00000000000000c0       0x30 ./src/resize_CB.o
+                0x0000000000000080       0x20 ./src/resize_CB.o
  .debug_aranges
-                0x00000000000000f0       0x30 ./src/report_data.o
+                0x00000000000000a0       0x20 ./src/report_data.o
  .debug_aranges
-                0x0000000000000120       0x30 ./src/clear_buffer.o
+                0x00000000000000c0       0x20 ./src/clear_buffer.o
  .debug_aranges
-                0x0000000000000150       0x30 ./src/pop_data.o
+                0x00000000000000e0       0x20 ./src/pop_data.o
  .debug_aranges
-                0x0000000000000180       0x30 ./main.o
+                0x0000000000000100       0x20 ./main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x28de
+.debug_info     0x0000000000000000     0x273a
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x0000000000000000      0x465 ./src/delete_CB.o
- .debug_info    0x0000000000000465      0x4ed ./src/init_CB.o
- .debug_info    0x0000000000000952      0x473 ./src/insert_data.o
- .debug_info    0x0000000000000dc5      0x473 ./src/insert_link.o
- .debug_info    0x0000000000001238      0x491 ./src/resize_CB.o
- .debug_info    0x00000000000016c9      0x485 ./src/report_data.o
- .debug_info    0x0000000000001b4e      0x465 ./src/clear_buffer.o
- .debug_info    0x0000000000001fb3      0x479 ./src/pop_data.o
- .debug_info    0x000000000000242c      0x4b2 ./main.o
+ .debug_info    0x0000000000000000      0x43b ./src/delete_CB.o
+ .debug_info    0x000000000000043b      0x4ab ./src/init_CB.o
+ .debug_info    0x00000000000008e6      0x449 ./src/insert_data.o
+ .debug_info    0x0000000000000d2f      0x449 ./src/insert_link.o
+ .debug_info    0x0000000000001178      0x45f ./src/resize_CB.o
+ .debug_info    0x00000000000015d7      0x453 ./src/report_data.o
+ .debug_info    0x0000000000001a2a      0x43b ./src/clear_buffer.o
+ .debug_info    0x0000000000001e65      0x44f ./src/pop_data.o
+ .debug_info    0x00000000000022b4      0x486 ./main.o
 
 .debug_abbrev   0x0000000000000000      0xbc5
  *(.debug_abbrev)
@@ -551,41 +585,50 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
  .debug_abbrev  0x0000000000000955      0x143 ./src/pop_data.o
  .debug_abbrev  0x0000000000000a98      0x12d ./main.o
 
-.debug_line     0x0000000000000000      0xad7
+.debug_line     0x0000000000000000      0xab9
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x0000000000000000      0x12a ./src/delete_CB.o
- .debug_line    0x000000000000012a      0x14a ./src/init_CB.o
- .debug_line    0x0000000000000274      0x13a ./src/insert_data.o
- .debug_line    0x00000000000003ae      0x12f ./src/insert_link.o
- .debug_line    0x00000000000004dd      0x136 ./src/resize_CB.o
- .debug_line    0x0000000000000613      0x148 ./src/report_data.o
- .debug_line    0x000000000000075b      0x12b ./src/clear_buffer.o
- .debug_line    0x0000000000000886      0x129 ./src/pop_data.o
- .debug_line    0x00000000000009af      0x128 ./main.o
+ .debug_line    0x0000000000000000      0x129 ./src/delete_CB.o
+ .debug_line    0x0000000000000129      0x147 ./src/init_CB.o
+ .debug_line    0x0000000000000270      0x134 ./src/insert_data.o
+ .debug_line    0x00000000000003a4      0x12c ./src/insert_link.o
+ .debug_line    0x00000000000004d0      0x134 ./src/resize_CB.o
+ .debug_line    0x0000000000000604      0x145 ./src/report_data.o
+ .debug_line    0x0000000000000749      0x12a ./src/clear_buffer.o
+ .debug_line    0x0000000000000873      0x126 ./src/pop_data.o
+ .debug_line    0x0000000000000999      0x120 ./main.o
 
-.debug_frame
+.debug_frame    0x0000000000000000      0x224
  *(.debug_frame)
+ .debug_frame   0x0000000000000000       0x34 ./src/delete_CB.o
+ .debug_frame   0x0000000000000034       0x84 ./src/init_CB.o
+ .debug_frame   0x00000000000000b8       0x34 ./src/insert_data.o
+ .debug_frame   0x00000000000000ec       0x34 ./src/insert_link.o
+ .debug_frame   0x0000000000000120       0x34 ./src/resize_CB.o
+ .debug_frame   0x0000000000000154       0x34 ./src/report_data.o
+ .debug_frame   0x0000000000000188       0x34 ./src/clear_buffer.o
+ .debug_frame   0x00000000000001bc       0x34 ./src/pop_data.o
+ .debug_frame   0x00000000000001f0       0x34 ./main.o
 
-.debug_str      0x0000000000000000      0x485
+.debug_str      0x0000000000000000      0x495
  *(.debug_str)
- .debug_str     0x0000000000000000      0x34c ./src/delete_CB.o
-                                        0x3bb (size before relaxing)
- .debug_str     0x000000000000034c       0x2c ./src/init_CB.o
-                                        0x3cd (size before relaxing)
- .debug_str     0x0000000000000378       0x1e ./src/insert_data.o
-                                        0x3bf (size before relaxing)
- .debug_str     0x0000000000000396       0x23 ./src/insert_link.o
-                                        0x3c4 (size before relaxing)
- .debug_str     0x00000000000003b9       0x2a ./src/resize_CB.o
+ .debug_str     0x0000000000000000      0x35e ./src/delete_CB.o
+                                        0x3c5 (size before relaxing)
+ .debug_str     0x000000000000035e       0x2c ./src/init_CB.o
+                                        0x3d7 (size before relaxing)
+ .debug_str     0x000000000000038a       0x1e ./src/insert_data.o
+                                        0x3c9 (size before relaxing)
+ .debug_str     0x00000000000003a8       0x23 ./src/insert_link.o
+                                        0x3ce (size before relaxing)
+ .debug_str     0x00000000000003cb       0x2a ./src/resize_CB.o
+                                        0x3d5 (size before relaxing)
+ .debug_str     0x00000000000003f5       0x1e ./src/report_data.o
+                                        0x3ce (size before relaxing)
+ .debug_str     0x0000000000000413       0x20 ./src/clear_buffer.o
                                         0x3cb (size before relaxing)
- .debug_str     0x00000000000003e3       0x1e ./src/report_data.o
-                                        0x3c4 (size before relaxing)
- .debug_str     0x0000000000000401       0x20 ./src/clear_buffer.o
-                                        0x3c1 (size before relaxing)
- .debug_str     0x0000000000000421       0x18 ./src/pop_data.o
-                                        0x3b9 (size before relaxing)
- .debug_str     0x0000000000000439       0x4c ./main.o
-                                        0x386 (size before relaxing)
+ .debug_str     0x0000000000000433       0x18 ./src/pop_data.o
+                                        0x3c3 (size before relaxing)
+ .debug_str     0x000000000000044b       0x4a ./main.o
+                                        0x3aa (size before relaxing)
 
 .debug_loc
  *(.debug_loc)
@@ -620,8 +663,11 @@ LOAD /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
 .gnu.attributes
  *(.gnu.attributes)
 
+.note.gnu.arm.ident
+ *(.note.gnu.arm.ident)
+
 /DISCARD/
  *(.note.GNU-stack)
  *(.gnu_debuglink)
  *(.gnu.lto_*)
-OUTPUT(char_histogram.elf elf64-x86-64)
+OUTPUT(char_histogram.elf elf32-littlearm)

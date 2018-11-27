@@ -54,6 +54,11 @@ KL25Z_CFLAGS= \
 
 KL25Z_LDFLAGS=-T ./platform/MKL25Z128xxx4_flash.ld
 
+BBB_CFLAGS= \
+-mcpu=cortex-a8 \
+-mthumb \
+-mfloat-abi=hard
+
 ##########################################################################
 
 ifeq ($(PLATFORM),LINUX)
@@ -63,9 +68,15 @@ SOURCES=$(COMMON_C_SRCS)
 
 else ifeq ($(PLATFORM),KL25Z) 
 CC=arm-none-eabi-gcc 
-CFLAGS= $(KL25Z_CFLAGS)
+CFLAGS= $(KL25Z_CFLAGS) $(LINUX_CFLAGS)
 SOURCES=$(COMMON_C_SRCS) $(KL25Z_C_SRCS) $(KL25Z_S_SRCS)
 LDFLAGS=$(KL25Z_LDFLAGS)
+
+else ifeq ($(PLATFORM),BB)
+CC=arm-linux-gnueabi-gcc
+CFLAGS=$(LINUX_CFLAGS) $(BBB_CFLAGS)
+SOURCES=$(COMMON_C_SRCS)
+
 
 endif
 
