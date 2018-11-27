@@ -23,8 +23,8 @@
 uint32_t database[256] = {0};
 uint8_t data_pop = 0;
 char num[20];
-
-
+uint32_t prime_number;
+char prime_print[30];
 //***********************************************************************************
 // Function definition
 //***********************************************************************************
@@ -66,15 +66,35 @@ int main(void)
 
 	uartinit();
 	RX_interrupt_init();
+	LED_init();
 
 	send_to_console_str("Welcome to Character Histogram Application\r\n");
 
 	//initiating the circular buffer
 	init_CB(&RX_buffer, SIZE_OF_RX_CB);
-
+	PTB->PSOR |= (1<<18);//off LED red
 	while(1)
 	{
 
+
+		    uint32_t i,j,k;
+		    for(i=2;i<999999;i++)
+				{ k =0;
+
+					for(j=1;j<=i;j++)
+					{
+						if(i%j == 0)
+						{
+						    k++;
+						}
+
+					}
+					if(k==2)
+					{
+					    prime_number = i ;
+					}
+
+				}
 	}
 
 #endif
@@ -99,7 +119,7 @@ int main(void)
 void sys_reload()
 {
 	SYSTICK_VAL = 0x0;    //clear current timer value
-	SYSTICK_LOAD = 0xFFFFFFFF; //loading value
+	SYSTICK_LOAD = 0xFFFFFFF; //loading value
 	SYSTICK_CTRL = 0x7; //enabling interrupt
 }
 
@@ -129,8 +149,29 @@ void SysTick_Handler(void)
 			PRINT(num);
 		}
 	}
+	sprintf(prime_print,"%d ",prime_number);
+
+	for(int i=1; i<=5; i++)
+	{
+	     for(int j=1; j<=i; j++)
+	      {
+	    		PRINT(prime_print);
+	      }
+	     PRINT("\r\n");
+	}
+
 	// disabling the systick interrupt
 	SYSTICK_CTRL = 0x0;
+	PTB->PSOR = (1<<18); // off red
+	flag_green_on = 1;
 }
 
+void LED_init()
+{
+	SIM_BASE_PTR->SCGC5 |= SIM_SCGC5_PORTB_MASK;
+	PORTB_PCR18 |= PORT_PCR_MUX(0x1);
+	PTB->PDDR |= (1<<18); // selecting as output
+
+
+}
 #endif
