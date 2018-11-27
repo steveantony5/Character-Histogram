@@ -8,9 +8,9 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include "inc/common_variable.h"
+#include "inc/common/common_variable.h"
 #include "CUnit/Basic.h"
-#include "inc/main.h"
+#include "inc/common/main.h"
 
 #define COUNT (10)
 uint8_t *p;

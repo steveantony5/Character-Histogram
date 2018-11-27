@@ -163,7 +163,6 @@ void SysTick_Handler(void)
 	// disabling the systick interrupt
 	SYSTICK_CTRL = 0x0;
 	PTB->PSOR = (1<<18); // off red
-	flag_green_on = 1;
 }
 
 void LED_init()
@@ -174,4 +173,5 @@ void LED_init()
 
 
 }
+
 #endif

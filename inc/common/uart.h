@@ -30,7 +30,7 @@ status init_CB(CB *,int32_t);
 status report_data(CB *);
 status clear_buffer(CB *);
 status pop_data(CB *,uint8_t *);
-
+void sys_reload();
 
 
 
