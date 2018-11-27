@@ -24,6 +24,7 @@
 
 status insert_link(CB *buffer)
 {
+    //creating a node
 	struct node *temp = (struct node *) malloc (sizeof(struct node));
     if (temp == NULL)
     {
@@ -32,12 +33,16 @@ status insert_link(CB *buffer)
     temp->data = '\0';
     temp->link = NULL;
 
+
+    //for the first node
     if((buffer->head)!= NULL)
     {
     	(temp->link) = (buffer->head);
         (buffer->head) = temp;
         ((buffer->tail)->link) = (buffer->head);
     }
+
+    //for nodes other than the first node
     else
     {
     	(buffer->head) = temp;

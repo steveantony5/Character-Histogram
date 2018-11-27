@@ -1,26 +1,43 @@
-/*
- * uart.c
- *
- *  Created on: Nov 7, 2018
- *      Author: Swarupa De
- */
+/**
+* @file uart.c
+*
+* This file contains function configuring, tranmitting and receiving part of UART0
+*
+* @author Steve and Swarupa
+* @date Nov 24, 2018
+*
+*/
 
-
-
+//***********************************************************************************
+// Include files
+//***********************************************************************************
 #include "MKL25Z4.h"
 #include "uart.h"
 #include "main.h"
 #include <stdlib.h>
 #include <string.h>
 
-#define UART0_BAUD_RATE             (57600) //115200
+#define UART0_BAUD_RATE             (57600) 
+
+
 //declare rx_buffer and tx_buffer for data manipulation
-extern int8_t RX_received;
-extern int count;
 extern uint8_t data_pop;
 extern uint32_t database[256] ;
-extern int8_t flag_report;
 
+//***********************************************************************************
+// Function definition
+//***********************************************************************************
+
+//*****************************************************************************
+// Name        : uartinit
+//
+// Description : Function to initiate UART0
+//
+// Arguments   : None
+//
+// return      : None
+//
+//****************************************************************************/
 void uartinit()
 {
 
@@ -55,8 +72,10 @@ void uartinit()
 			UART0_BDH |= UARTLP_BDH_SBR((baudmoddivisor >> 8)) ;
 			UART0_BDL |= UARTLP_BDL_SBR(baudmoddivisor);
 
-			//Selecting 8 bit data, 1 stop bit, No parity
+			//Selecting 8 bit data, No parity
 			UART0_C1 |= UART0_C1_M(0) | UART_C1_PE(0);
+
+			//selecting one stop bit
 			UART0_BDH |= UART_BDH_SBNS(0);
 
 
@@ -67,45 +86,109 @@ void uartinit()
 
 }
 
+//***********************************************************************************
+// Function definition
+//***********************************************************************************
+
+//*****************************************************************************
+// Name        : RX_interrupt_init
+//
+// Description : Function to activate receive interrupt in UART0
+//
+// Arguments   : None
+//
+// return      : None
+//
+//****************************************************************************/
+
 void RX_interrupt_init()
 {
 
 	NVIC_EnableIRQ(UART0_IRQn);
+
+	//enabling RIE
 	UART0_C2 |= (UART_C2_RIE_MASK);
 
 }
+
+//***********************************************************************************
+// Function definition
+//***********************************************************************************
+
+//*****************************************************************************
+// Name        : send_to_console_str
+//
+// Description : Function to transmit a string
+//
+// Arguments   : string to be transmitted
+//
+// return      : None
+//
+//****************************************************************************/
 void send_to_console_str(char data[])
 {
 	for(int i =0; data[i] != '\0'; i++)
 	{
+		//polling mode
 		while(!(UART0_S1 & UART_S1_TDRE_MASK));
 		UART0_D = (data[i]);
 		while(!(UART0_S1 & UART_S1_TC_MASK));
 	}
 }
 
+//***********************************************************************************
+// Function definition
+//***********************************************************************************
+
+//*****************************************************************************
+// Name        : send_to_console
+//
+// Description : Function to transmit a byte
+//
+// Arguments   : byte to be transmitted
+//
+// return      : None
+//
+//****************************************************************************/
 void send_to_console(uint8_t data)
 {
 	while(!(UART0_S1 & UART_S1_TDRE_MASK));
 	UART0_D = (data);
 	while(!(UART0_S1 & UART_S1_TC_MASK));
-
-
-
 }
 
+
+
+//***********************************************************************************
+// RX ISR definition
+//***********************************************************************************
+
+//*****************************************************************************
+// Name        : UART0_IRQHandler
+//
+// Description : IRQ for receive interrupt
+//
+// Arguments   : None
+//
+// return      : None
+//
+//****************************************************************************/
 void UART0_IRQHandler()
 {
 	if((UART0_S1) & (UART0_S1_RDRF_MASK))
 		{
 
-		insert_data(&RX_buffer, UART0_D);
-					pop_data(&RX_buffer,&data_pop);
+			//insert byte to circular buffer
+			insert_data(&RX_buffer, UART0_D);
 
-					database[data_pop] = database[data_pop] + 1;
-					RX_received = 0;
+			//pop data from circular buffer
+			pop_data(&RX_buffer,&data_pop);
 
-					sys_reload();
+			//updating the count database
+			database[data_pop] = database[data_pop] + 1;
+			
+			//initiating the systick timer
+			sys_reload();
 		}
 }
 

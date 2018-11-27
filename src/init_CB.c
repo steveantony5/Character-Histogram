@@ -40,12 +40,17 @@ status init_CB(CB *buffer,int32_t length)
 	(buffer->max_size) = 0;
 	(buffer->flag_init) = 0;
 
+	//check if the length is valid
 	if(length<=0)
 		return ERROR;
 
+	//creating the circular buffer
 	else
 	{
+		//flag for buffer initialisation
 		(buffer->flag_init) = 1;
+
+		//circular linked list creation
 		for(int i=1; i<=length;i++)
 		{
 			if((insert_link(buffer)) == ERROR)
@@ -55,6 +60,8 @@ status init_CB(CB *buffer,int32_t length)
 			}
         }
     }
+
+    
     (buffer->front_CB) = (buffer->head);
     (buffer->rear_CB) = (buffer->head);
 

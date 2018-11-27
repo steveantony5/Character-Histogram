@@ -1,6 +1,6 @@
 
 //*****************************************************************************
-// Name        : delete_data
+// Name        : delete_CB
 //
 // Description : Function to delete data from the circular Buffer
 //
@@ -19,20 +19,22 @@
 //***********************************************************************************
 // Include files
 //***********************************************************************************
-#include "delete_data.h"
+#include "delete_CB.h"
 
 //***********************************************************************************
 // Function definition
 //***********************************************************************************
 
-status delete_data(CB *buffer)
+status delete_CB(CB *buffer)
 {
+	//check if the buffer is initialised
 	if((buffer->flag_init) != 1)
 	{
 		PRINT("Buffer not initialized\r\n");
 		return BUFFER_NOT_INITIALISED;
 	}
 
+	//desroying the circular buffer
 	else
 	{
 		free(buffer->head);

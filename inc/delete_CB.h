@@ -12,8 +12,8 @@
 // Include files
 //***********************************************************************************
 
-#ifndef _DELETE_DATA_H_
-#define _DELETE_DATA_H_
+#ifndef _DELETE_CB_H_
+#define _DELETE_CB_H_
 
 
 #include <stdio.h>
@@ -28,7 +28,7 @@
 //***********************************************************************************
 // function prototypes
 //***********************************************************************************
-status delete_data(CB *);
+status delete_CB(CB *);
 int8_t IsEMPTY(CB *);
 
 #endif

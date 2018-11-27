@@ -31,7 +31,7 @@ status insert_link(CB *);
 status insert_data(CB *,uint8_t);
 int8_t IsEMPTY(CB *);
 int8_t IsFULL(CB *);
-status delete_data(CB *);
+status delete_CB(CB *);
 status init_CB(CB *,int32_t);
 status report_data(CB *);
 status clear_buffer(CB *);

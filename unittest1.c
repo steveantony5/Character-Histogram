@@ -40,6 +40,7 @@ int random_generator(int8_t seed)
      }
      parameter_value[i] = seed;
     }
+    return 0;
 
 }  
 
@@ -47,13 +48,14 @@ int init(void)
 {
 	init_CB(&buffer_2, (COUNT/2));
 	init_CB(&buffer_3, (COUNT));
-	
+	//return 0;
 
 }
 
 int init_delete(void)
 {
 	init_CB(&buffer_4, (COUNT));
+	//return 0;
 }
 
 
@@ -113,7 +115,7 @@ void test_init_CB() //suite1
       
     for(p= parameter_value,i=0; i<COUNT ; i++, p++)
 	{
-		CU_ASSERT_EQUAL(delete_data(&buffer_1),BUFFER_NOT_INITIALISED);
+		CU_ASSERT_EQUAL(delete_CB(&buffer_1),BUFFER_NOT_INITIALISED);
 	} 
 
 	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
@@ -172,8 +174,8 @@ void test_insert_data() //suite2
 
 	CU_ASSERT_EQUAL(insert_data(&buffer_3, 0),SUCCESS);  
 
-	CU_ASSERT_EQUAL(delete_data(&buffer_2), SUCCESS);
-	CU_ASSERT_EQUAL(delete_data(&buffer_3), SUCCESS);
+	CU_ASSERT_EQUAL(delete_CB(&buffer_2), SUCCESS);
+	CU_ASSERT_EQUAL(delete_CB(&buffer_3), SUCCESS);
 
   
    
@@ -187,11 +189,11 @@ void test_delete_data() //suite3
 	{
 		if(i == 0)
 		{
-			CU_ASSERT_EQUAL(delete_data(&buffer_4),SUCCESS);
+			CU_ASSERT_EQUAL(delete_CB(&buffer_4),SUCCESS);
 		}
 		else
 		{
-			CU_ASSERT_EQUAL(delete_data(&buffer_4),BUFFER_NOT_INITIALISED);
+			CU_ASSERT_EQUAL(delete_CB(&buffer_4),BUFFER_NOT_INITIALISED);
 		}
 	}
 
@@ -230,7 +232,7 @@ void test_pop_and_report_data() //suite4
 	}
 	
 
-	CU_ASSERT_EQUAL(delete_data(&buffer_5),SUCCESS);
+	CU_ASSERT_EQUAL(delete_CB(&buffer_5),SUCCESS);
 }
 
 void test_resize_CB() //suite5
@@ -251,8 +253,8 @@ void test_resize_CB() //suite5
 	CU_ASSERT_EQUAL(resize_CB(&buffer_7,-2),ERROR);
 	CU_ASSERT_EQUAL(resize_CB(&buffer_7,0),ERROR);
 
-	CU_ASSERT_EQUAL(delete_data(&buffer_6),SUCCESS);
-	CU_ASSERT_EQUAL(delete_data(&buffer_7),SUCCESS);
+	CU_ASSERT_EQUAL(delete_CB(&buffer_6),SUCCESS);
+	CU_ASSERT_EQUAL(delete_CB(&buffer_7),SUCCESS);
 
 
 
@@ -262,7 +264,7 @@ void test_clear_buffer() //suite5
 {
 
    CU_ASSERT_EQUAL(clear_buffer(&buffer_8),SUCCESS);
-   //CU_ASSERT_EQUAL(clear_buffer(&buffer_8),EMPTY);
+   CU_ASSERT_EQUAL(clear_buffer(&buffer_8),EMPTY);
 
 }
 
@@ -391,4 +393,3 @@ int main(void)
 	CU_cleanup_registry();
 	return CU_get_error();
 }
-

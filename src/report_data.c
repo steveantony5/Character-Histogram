@@ -26,17 +26,22 @@
 
 status report_data(CB *buffer)
 {
+	//check if the buffer is initialised
 	if((buffer->flag_init) != 1)
 	{
 		PRINT("Buffer not initialized\r\n");
 		return BUFFER_NOT_INITIALISED;
 	}
+
+	//check if the buffer is empty
 	else if(IsEMPTY(buffer))
 	{
 		PRINT("No data to display: Buffer is empty\r\n");
 		return EMPTY;
 	}
 
+
+	// report data function
 	else
 	{
 		struct node* temp;

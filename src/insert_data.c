@@ -27,17 +27,22 @@
 
 status insert_data(CB *buffer,uint8_t val)
 {
+	//check for buffer initialisation
 	if((buffer->flag_init) != 1)
 	{
 		PRINT("Buffer not initialized\r\n");
 		return BUFFER_NOT_INITIALISED;
 	}
+
+	//check for space in buffer
 	else if(IsFULL(buffer))
 	{
 		PRINT("\nThe Buffer is FULL\r\n");
 		PRINT("Adding failed\r\n");
 		return OVERFLOW;
 	}
+
+	//adding elements in the buffer when it is added for the first time from empty state
 	else if(((buffer->front_CB) == (buffer->rear_CB))&& (IsEMPTY(buffer)))
 	{
 		((buffer->rear_CB) -> data) = val;
@@ -49,6 +54,8 @@ status insert_data(CB *buffer,uint8_t val)
 #endif
 		return SUCCESS;
 	}
+
+	//adding elements to the buffer
 	else
 	{
 		(buffer->rear_CB) = ((buffer->rear_CB) -> link);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               

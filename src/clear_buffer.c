@@ -26,18 +26,21 @@
 
 status clear_buffer(CB *buffer)
 {
-	
+	//Check if the buffer is not initialized
 	if((buffer->flag_init) != 1)
 	{
 		PRINT("Buffer not initialized\r\n");
 		return BUFFER_NOT_INITIALISED;
 	}
+
+	//check if the buffer is empty
 	else if(IsEMPTY(buffer))
 	{
 		PRINT("Nothing to clear: Buffer is empty\r\n");
 		return EMPTY;
 	}
 	
+	//clearing the buffer contents
 	else
 	{
 		(buffer->front_CB) = (buffer->head);

@@ -1,3 +1,15 @@
+/**
+* @file common_variable.h
+* @brief contains the variables used across other files
+*
+*
+* @author Steve and Swarupa
+* @date Nov 7, 2018
+*
+*/
+//***********************************************************************************
+// Include files
+//***********************************************************************************
 #ifndef _COMMON_VARIABLE_H_
 #define  _COMMON_VARIABLE_H_
 

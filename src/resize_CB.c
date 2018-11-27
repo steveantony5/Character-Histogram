@@ -26,16 +26,18 @@
 //***********************************************************************************
 status resize_CB(CB *buffer, int32_t elements_to_add)
 {
-	
+	//check if the number of elements to be added is valid number
 	if(elements_to_add<=0)
 		return ERROR;
 
+	//check if the buffer is initialised
 	else if((buffer->flag_init) != 1)
 	{
 		PRINT("Buffer not initialized\r\n");
 		return BUFFER_NOT_INITIALISED;
 	}
 
+	//resizing
 	else
 	{
 		for(int i=1; i<=elements_to_add;i++)
