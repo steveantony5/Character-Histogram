@@ -23,7 +23,6 @@
 //declare rx_buffer and tx_buffer for data manipulation
 extern uint8_t data_pop;
 extern uint32_t database[256] ;
-
 //***********************************************************************************
 // Function definition
 //***********************************************************************************
@@ -177,6 +176,7 @@ void UART0_IRQHandler()
 {
 	if((UART0_S1) & (UART0_S1_RDRF_MASK))
 		{
+			PTB->PCOR = (1<<18); //on red
 
 			//insert byte to circular buffer
 			insert_data(&RX_buffer, UART0_D);
