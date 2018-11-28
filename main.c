@@ -1,7 +1,7 @@
 /**
 * @file main.c
 *
-* 
+*
 * @author Steve and Swarupa
 * @date Nov 6, 2018
 *
@@ -13,18 +13,17 @@
 
 #include "main.h"
 
-#ifdef FRDM
-#include "MKL25Z4.h"
-#define SYSTICK_CTRL (*((volatile unsigned long *) (0xE000E010)))
-#define SYSTICK_LOAD (*((volatile unsigned long *) (0xE000E014)))
-#define SYSTICK_VAL (*((volatile unsigned long *) (0xE000E018)))
-#endif
+
+//***********************************************************************************
+// Globals
+//***********************************************************************************
 
 uint32_t database[256] = {0};
 uint8_t data_pop = 0;
 char num[20];
 uint32_t prime_number;
 char prime_print[30];
+
 //***********************************************************************************
 // Function definition
 //***********************************************************************************
@@ -64,41 +63,89 @@ int main(void)
 #ifdef FRDM
 
 
+	//Interrupt mode - Character Histogram application
+#ifdef INTERRUPT
+
+	//initiating UART0
 	uartinit();
+
+	//Initiating UART Rx interrupt
 	RX_interrupt_init();
-	LED_init();
+
+	//Initiating LED Red
+	LED_init_IRQ();
 
 	send_to_console_str("Welcome to Character Histogram Application\r\n");
 
 	//initiating the circular buffer
 	init_CB(&RX_buffer, SIZE_OF_RX_CB);
+
 	PTB->PSOR |= (1<<18);//off LED red
+
 	while(1)
 	{
 
+	    uint32_t value,divisor,Exact_divisible_count;
 
-		    uint32_t i,j,k;
-		    for(i=2;i<999999;i++)
-				{ k =0;
+	    //Prime number generator
+	    for(value=2;value<MAX_PRIME_NUMBER;value++)
+		{
+	    	Exact_divisible_count =0;
 
-					for(j=1;j<=i;j++)
-					{
-						if(i%j == 0)
-						{
-						    k++;
-						}
-
-					}
-					if(k==2)
-					{
-					    prime_number = i ;
-					}
-
+			for(divisor=1;divisor<=value;divisor++)
+			{
+				//Checks if the remainder is zero
+				if(value%divisor == 0)
+				{
+					Exact_divisible_count++;
 				}
+			}
+
+			//If Exact_divisible_count=2, it is a prime number
+			if(Exact_divisible_count==2)
+			{
+			    prime_number = value ;
+			}
+
+		}
 	}
 
-#endif
+	#endif
 
+	//polling mode - echoing characters
+#define POLLING
+
+	//configuring interrupt
+	uartinit();
+
+	//variable to store the received data
+	uint8_t data_poll = 0;
+
+	//Flag to indicate that a data is received
+	int FLAG_RECV = 0;
+
+	while(1)
+	{
+		// Receiver polling
+		while(UART0_S1 & UART0_S1_RDRF_MASK)
+		{
+			data_poll = UART0_D;
+			FLAG_RECV = 1;
+		}
+
+		//Transmitting
+		while(FLAG_RECV == 1)
+		{
+			while(UART0_S1 & UART0_S1_TDRE_MASK)
+			{
+				UART0_D = data_poll;
+			}
+			FLAG_RECV = 0;
+		}
+
+	}
+#endif
+	return 1;
 }
 
 #ifdef FRDM
@@ -120,7 +167,7 @@ void sys_reload()
 {
 	SYSTICK_VAL = 0x0;    //clear current timer value
 	SYSTICK_LOAD = 0xFFFFFFF; //loading value
-	SYSTICK_CTRL = 0x7; //enabling interrupt
+	SYSTICK_CTRL = 0x7; //enabling systick interrupt
 }
 
 //***********************************************************************************
@@ -139,10 +186,13 @@ void sys_reload()
 //****************************************************************************/
 void SysTick_Handler(void)
 {
-	PTB->PCOR = (1<<18); //on red
+	PTB->PCOR = (1<<18); //on red LED
+
 	PRINT("\r\n\r\n");
 	PRINT("Report:\r\n");
-	for(int i =0;i<256;i++)
+
+	//Report Generation Part
+	for(int i =0;i<MAX_ASCII;i++)
 	{
 		if(database[i]!= 0)
 		{
@@ -150,11 +200,17 @@ void SysTick_Handler(void)
 			PRINT(num);
 		}
 	}
+
+
+	//Triangle pattern generation using prime number
+
 	sprintf(prime_print,"%d ",prime_number);
 
-	for(int i=1; i<=5; i++)
+	PRINT("---------------------------------\r\n");
+	//Pattern
+	for(int row=1; row<=ROWS_PATTERN_MAX; row++)
 	{
-	     for(int j=1; j<=i; j++)
+	     for(int column=1; column<=row; column++)
 	      {
 	    		PRINT(prime_print);
 	      }
@@ -163,15 +219,19 @@ void SysTick_Handler(void)
 
 	// disabling the systick interrupt
 	SYSTICK_CTRL = 0x0;
-	PTB->PSOR = (1<<18); // off red
+
+	PTB->PSOR = (1<<18); // off red LED
 }
 
-void LED_init()
+void LED_init_IRQ()
 {
+	//Clock for PORT B
 	SIM_BASE_PTR->SCGC5 |= SIM_SCGC5_PORTB_MASK;
-	PORTB_PCR18 |= PORT_PCR_MUX(0x1);
-	PTB->PDDR |= (1<<18); // selecting as output
 
+	//Alternate function selection for PIN 18 of PORT B
+	PORTB_PCR18 |= PORT_PCR_MUX(0x1);
+
+	PTB->PDDR |= (1<<18); // selecting as output pin
 
 }
 #endif
