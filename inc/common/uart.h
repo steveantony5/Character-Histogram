@@ -5,15 +5,16 @@
  *      Author: Swarupa De
  */
 
-
 #ifndef INCLUDE_UART_H_
 #define INCLUDE_UART_H_
 
 #include "common_variable.h"
 
 
+#define UART0_BAUD_RATE (57600)
+
+
 void uartinit();
-status receive_from_console();
 void RX_interrupt_init();
 void send_to_console_str(char []);
 void send_to_console(uint8_t);
@@ -33,9 +34,5 @@ status pop_data(CB *,uint8_t *);
 void sys_reload();
 
 
-
-
-
 #endif /* INCLUDE_UART_H_ */
-
 
