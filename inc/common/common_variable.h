@@ -15,12 +15,12 @@
 
 //------------------------------------------------------------------------
 // Mode selection
-#define FRDM
+//#define FRDM
 
-#define INTERRUPT
+//#define INTERRUPT
 //#define POLLING
 
-//#define LINUX
+#define LINUX
 
 //#define DEBUG
 //------------------------------------------------------------------------
