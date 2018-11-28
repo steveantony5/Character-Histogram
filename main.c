@@ -139,17 +139,18 @@ void sys_reload()
 //****************************************************************************/
 void SysTick_Handler(void)
 {
+	PTB->PCOR = (1<<18); //on red
 	PRINT("\r\n\r\n");
 	PRINT("Report:\r\n");
 	for(int i =0;i<256;i++)
 	{
 		if(database[i]!= 0)
 		{
-			sprintf(num," %c - %lu \r\n",i,database[i]);
+			sprintf(num," %c - %d \r\n",i,database[i]);
 			PRINT(num);
 		}
 	}
-	sprintf(prime_print,"%lu ",prime_number);
+	sprintf(prime_print,"%d ",prime_number);
 
 	for(int i=1; i<=5; i++)
 	{
@@ -173,5 +174,4 @@ void LED_init()
 
 
 }
-
 #endif
