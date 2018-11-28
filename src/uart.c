@@ -189,6 +189,7 @@ void UART0_IRQHandler()
 			
 			//initiating the systick timer
 			sys_reload();
+			PTB->PSOR = (1<<18); // off red
 		}
 }
 
