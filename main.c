@@ -196,7 +196,7 @@ void SysTick_Handler(void)
 	{
 		if(database[i]!= 0)
 		{
-			sprintf(num," %c - %d \r\n",i,database[i]);
+			sprintf(num," %c - %lu \r\n",i,database[i]);
 			PRINT(num);
 		}
 	}
@@ -204,7 +204,7 @@ void SysTick_Handler(void)
 
 	//Triangle pattern generation using prime number
 
-	sprintf(prime_print,"%d ",prime_number);
+	sprintf(prime_print,"%lu ",prime_number);
 
 	PRINT("---------------------------------\r\n");
 	//Pattern
