@@ -13,12 +13,11 @@
 #include "../inc/common/main.h"
 #include <time.h>
 
-#define COUNT (10) // must be any even value above or equal to 10
 #define MAX_VALUE (255) // largest value of ascii
 
-uint8_t *p;
-uint8_t data_pop;
-uint8_t parameter_value[COUNT];
+uint8_t *p = NULL;
+uint8_t data_pop= 0;
+uint8_t parameter_value[2000] = {0};
 CB buffer_1;
 CB buffer_2;
 CB buffer_3;
@@ -28,15 +27,15 @@ CB buffer_6;
 CB buffer_7;
 CB buffer_8;
 
+int32_t COUNT = 0;
 /*random value generator function */
-int random_generator(int8_t seed)
+int random_generator()
 {
 
-  for(int i= 0; i<COUNT; i++) 
+  for(uint32_t i= 0; i< COUNT; i++) 
     {
      
-     parameter_value[i] = rand();
-     printf("%d ",parameter_value[i]);
+     parameter_value[i] = (rand() % MAX_VALUE );
     }
     return 0;
 
@@ -49,7 +48,7 @@ int random_generator(int8_t seed)
 /*Suite 2*/
 int init(void)
 {
-	init_CB(&buffer_2, (COUNT/2));
+	init_CB(&buffer_2, (COUNT));
 	init_CB(&buffer_3, (COUNT));
 	return 0;
 
@@ -89,7 +88,7 @@ int init_suite_resize(void)
 int init_suite_clear(void)
 {
     init_CB(&buffer_8, (COUNT));
-     int i;
+     uint32_t i;
         
 	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
 	{
@@ -142,19 +141,18 @@ void test_init_CB() //suite1
 
 void test_insert_data() //suite2
 {
-	int i;
+	uint32_t i;
     for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
 	{
-		if(i < (COUNT)/2)
-		{
-			CU_ASSERT_EQUAL(insert_data(&buffer_2,*p),SUCCESS);
+		CU_ASSERT_EQUAL(insert_data(&buffer_2,*p),SUCCESS);
 
-		}
-		else
-		{
-			//Buffer overflow
+	}
+	
+	//Buffer overflow
+	for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
+	{			
 			CU_ASSERT_EQUAL(insert_data(&buffer_2,*p),-4);
-		}
+		
 	}
 	
 	//boundary conditions
@@ -180,7 +178,7 @@ void test_insert_data() //suite2
 void test_delete_data() //suite3
 {
 
-	int i;
+	uint32_t i;
 	for(i=0; i<COUNT ; i++)
 	{
 		if(i == 0)
@@ -197,7 +195,7 @@ void test_delete_data() //suite3
 
 void test_pop_and_report_data() //suite4
 {
-	int i;
+	uint32_t i;
 
 	//inserting elements - success
   	for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
@@ -239,7 +237,7 @@ void test_pop_and_report_data() //suite4
 
 void test_resize_CB() //suite5
 {
-	int i;
+	uint32_t i;
 
 	//insert data - success
      for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
@@ -402,7 +400,15 @@ int main(void)
     /* Intializes random number generator */
    srand((unsigned) time(&t));
 
-    random_generator(rand());
+  check:
+    COUNT = ((rand()) % 1000);
+
+    if((COUNT < 10))
+    {
+    	goto check;
+    }
+    printf("COUNT %d\n",COUNT);
+    random_generator();
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();
 	CU_cleanup_registry();
