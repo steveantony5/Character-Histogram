@@ -27,6 +27,13 @@
 
 status delete_CB(CB *buffer)
 {
+	//checks if it is a null pointer
+	if(buffer==NULL)
+    {
+        PRINT("Null pointer input\r\n");
+        return NULL_PTR;
+    }
+	
 	//check if the buffer is initialised
 	if((buffer->flag_init) != 1)
 	{

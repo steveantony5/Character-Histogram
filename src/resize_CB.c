@@ -26,9 +26,19 @@
 //***********************************************************************************
 status resize_CB(CB *buffer, int32_t elements_to_add)
 {
+	//checks if it is a null pointer
+	if(buffer==NULL)
+	{
+		PRINT("Null pointer input\r\n");
+		return NULL_PTR;
+	}
+
 	//check if the number of elements to be added is valid number
 	if(elements_to_add<=0)
+	{
+		PRINT("elements_to_add input is not valid\r\n");
 		return ERROR;
+	}
 
 	//check if the buffer is initialised
 	else if((buffer->flag_init) != 1)

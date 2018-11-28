@@ -15,12 +15,11 @@
 
 //------------------------------------------------------------------------
 // Mode selection
-#define FRDM
+//#define FRDM
 
 //#define INTERRUPT
-#define POLLING
-
-//#define LINUX
+//#define POLLING
+#define LINUX
 
 //#define DEBUG
 //------------------------------------------------------------------------
@@ -39,6 +38,7 @@
 //Error handling enums
 typedef enum status_t
 {
+	NULL_PTR = -5,
 	OVERFLOW = -4,
 	EMPTY = -3,
 	BUFFER_NOT_INITIALISED = -2,

@@ -13,8 +13,8 @@
 #include "../inc/common/main.h"
 #include <time.h>
 
-#define COUNT (200)
-#define MAX_VALUE (255)
+#define COUNT (10) // must be any even value above or equal to 10
+#define MAX_VALUE (255) // largest value of ascii
 
 uint8_t *p;
 uint8_t data_pop;
@@ -109,6 +109,17 @@ void test_init_CB() //suite1
 {
 	
      p= parameter_value;  
+     
+     CB *circular_buffer;
+     circular_buffer = NULL; 
+
+     CU_ASSERT_EQUAL(init_CB(circular_buffer, 5), NULL_PTR);
+     CU_ASSERT_EQUAL(insert_data(circular_buffer,*p),NULL_PTR);
+	CU_ASSERT_EQUAL(delete_CB(circular_buffer),NULL_PTR);
+	CU_ASSERT_EQUAL(report_data(circular_buffer),NULL_PTR);
+	CU_ASSERT_EQUAL(clear_buffer(circular_buffer),NULL_PTR);
+	CU_ASSERT_EQUAL(resize_CB(circular_buffer,*p),NULL_PTR);
+	CU_ASSERT_EQUAL(pop_data(circular_buffer,&data_pop),NULL_PTR);	
 
 	CU_ASSERT_EQUAL(insert_data(&buffer_1,*p),BUFFER_NOT_INITIALISED);
 	CU_ASSERT_EQUAL(delete_CB(&buffer_1),BUFFER_NOT_INITIALISED);

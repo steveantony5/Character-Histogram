@@ -26,6 +26,13 @@
 
 status clear_buffer(CB *buffer)
 {
+	//checks if it is a null pointer
+	if(buffer==NULL)
+    {
+        PRINT("Null pointer input\r\n");
+        return NULL_PTR;
+    }
+	
 	//Check if the buffer is not initialized
 	if((buffer->flag_init) != 1)
 	{

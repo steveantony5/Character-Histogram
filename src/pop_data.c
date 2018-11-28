@@ -28,6 +28,13 @@
 status pop_data(CB *buffer,uint8_t *data)
 {
 
+	//checks if it is a null pointer
+	if(buffer==NULL)
+	{
+		PRINT("Null pointer input\r\n");
+		return NULL_PTR;
+	}
+
 	*data = 0;
 
 	//check if the buffer is initialised

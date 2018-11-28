@@ -24,10 +24,18 @@
 
 status insert_link(CB *buffer)
 {
+    //checks if it is a null pointer
+    if(buffer==NULL)
+    {
+        PRINT("Null pointer input\r\n");
+        return NULL_PTR;
+    }
+
     //creating a node
 	struct node *temp = (struct node *) malloc (sizeof(struct node));
     if (temp == NULL)
     {
+        PRINT("no memory space\r\n");
         return ERROR;
     }
     temp->data = '\0';

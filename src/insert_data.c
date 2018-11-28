@@ -27,6 +27,13 @@
 
 status insert_data(CB *buffer,uint8_t val)
 {
+	//checks if it is a null pointer
+	if(buffer==NULL)
+    {
+        PRINT("Null pointer input\r\n");
+        return NULL_PTR;
+    }
+	
 	//check for buffer initialisation
 	if((buffer->flag_init) != 1)
 	{

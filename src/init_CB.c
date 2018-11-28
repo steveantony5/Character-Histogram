@@ -32,6 +32,20 @@
 
 status init_CB(CB *buffer,int32_t length)
 {
+	//checks if it is a null pointer
+	if(buffer==NULL)
+    {
+        PRINT("Null pointer input\r\n");
+        return NULL_PTR;
+    }
+
+	//check if the length is valid
+	if(length<=0)
+	{
+		PRINT("Not a valid length\r\n");
+		return ERROR;
+	}
+
 	(buffer->head) = NULL;
 	(buffer->tail) = NULL;
 	(buffer->front_CB) = NULL;
@@ -40,14 +54,11 @@ status init_CB(CB *buffer,int32_t length)
 	(buffer->max_size) = 0;
 	(buffer->flag_init) = 0;
 
-	//check if the length is valid
-	if(length<=0)
-		return ERROR;
+	
 
 	//creating the circular buffer
-	else
-	{
-		//flag for buffer initialisation
+	
+			//flag for buffer initialisation
 		(buffer->flag_init) = 1;
 
 		//circular linked list creation
@@ -59,7 +70,7 @@ status init_CB(CB *buffer,int32_t length)
 				return ERROR;
 			}
         }
-    }
+    
 
     
     (buffer->front_CB) = (buffer->head);
