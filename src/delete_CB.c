@@ -34,20 +34,32 @@ status delete_CB(CB *buffer)
 		return BUFFER_NOT_INITIALISED;
 	}
 
-	//desroying the circular buffer
+	//desroying the circular buffer 
+	// Traversing through the circular linked list and deleting
 	else
 	{
-		/*CB *tmp = NULL;
+		// creating a temporary variable
+		CB *tmp;
+		CB tmp_1;
+		tmp = &tmp_1;
+
 		//freeing the circular linked list
 		while((buffer->max_size)>0)
 		{
+			#ifdef DEBUG
 			printf("max size %d\n",(buffer->max_size));
+			printf("head %p\n",(buffer->head));
+
+			#endif
+
+			//traversing through the linked list
 			(tmp->head) = (buffer->head);
 			(buffer->head) = ((buffer->head) -> link);
 			free((tmp->head));
 			(buffer->max_size)--;
-		}*/
+		}
 
+		//making all pointers NULL after freeing
 		(buffer->head) = NULL;
 		(buffer->tail) = NULL;
 		(buffer->front_CB) = NULL;

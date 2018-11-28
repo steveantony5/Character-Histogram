@@ -13,7 +13,7 @@
 #include "inc/common/main.h"
 #include <time.h>
 
-#define COUNT (1000)
+#define COUNT (200)
 #define MAX_VALUE (255)
 
 uint8_t *p;

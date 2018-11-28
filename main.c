@@ -44,7 +44,8 @@ int main(void)
 #ifdef LINUX
 	init_CB(&RX_buffer,5);
 
-
+	delete_CB(&RX_buffer);
+	delete_CB(&RX_buffer);
 
 	report_data(&RX_buffer);
 
