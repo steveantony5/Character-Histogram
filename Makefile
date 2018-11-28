@@ -92,16 +92,26 @@ endif
 %.o: %.S
 	-$(CC) $(CFLAGS) -c $< -o $@ 
 
-
+ifeq ($(PLATFORM),KL25Z) 
 char_histogram :$(OBJS)
 	-$(CC) $(CFLAGS) $(LDFLAGS) -Xlinker -Map=char_histogram.map -o char_histogram.elf $(OBJS)
+else
+char_histogram :$(OBJS)
+	-$(CC) $(CFLAGS) $(LDFLAGS) -o char_histogram.elf $(OBJS)
+endif
+
+	-@echo ' '
+	-size char_histogram.elf
 
 unit: 
-	gcc -Wall -o unit unittest1.c src/delete_CB.o src/insert_link.o src/insert_data.o src/clear_buffer.o src/resize_CB.o src/init_CB.o src/report_data.o src/pop_data.o -lcunit
+	gcc -Wall -o unit UNIT_Test/unittest1.c src/delete_CB.o src/insert_link.o src/insert_data.o src/clear_buffer.o src/resize_CB.o src/init_CB.o src/report_data.o src/pop_data.o -lcunit
 
 clean:
-	-rm *.o char_histogram.elf
+	-rm *.o char_histogram.elf 
 	-rm ./src/*.o
+
+clean_map:
+	-rm char_histogram.map
 
 uclean:
 	-rm unit

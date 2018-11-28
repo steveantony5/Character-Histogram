@@ -8,9 +8,9 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include "inc/common/common_variable.h"
+#include "../inc/common/common_variable.h"
 #include "CUnit/Basic.h"
-#include "inc/common/main.h"
+#include "../inc/common/main.h"
 #include <time.h>
 
 #define COUNT (200)

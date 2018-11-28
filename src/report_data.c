@@ -74,7 +74,7 @@ status report_data(CB *buffer)
 		//print the count of elements
 		#ifdef FRDM
 		char count_str[30];
-		sprintf(count_str,"Total elements present = %u \r\n",(count+1));
+		sprintf(count_str,"Total elements present = %lu \r\n",(count+1));
 		PRINT(count_str);
 		#else
 		printf("Total elements present = %u \n",(count+1));
