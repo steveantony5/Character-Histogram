@@ -22,6 +22,17 @@
 
 #ifdef FRDM
 #include "uart.h"
+
+#include "MKL25Z4.h"
+#define MAX_PRIME_NUMBER (9999999)
+#define MAX_ASCII (256)
+#define ROWS_PATTERN_MAX (5)
+
+//Macros for systick timer
+#define SYSTICK_CTRL (*((volatile unsigned long *) (0xE000E010)))
+#define SYSTICK_LOAD (*((volatile unsigned long *) (0xE000E014)))
+#define SYSTICK_VAL (*((volatile unsigned long *) (0xE000E018)))
+
 #endif
 
 #define SIZE_OF_RX_CB (30)
@@ -36,6 +47,6 @@ status init_CB(CB *,int32_t);
 status report_data(CB *);
 status clear_buffer(CB *);
 status pop_data(CB *,uint8_t *);
-void LED_init();
+void LED_init_IRQ();
 
 #endif

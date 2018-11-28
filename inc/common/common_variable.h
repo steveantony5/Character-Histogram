@@ -13,19 +13,22 @@
 #ifndef _COMMON_VARIABLE_H_
 #define  _COMMON_VARIABLE_H_
 
+//------------------------------------------------------------------------
+// Mode selection
 //#define FRDM
+
+//#define INTERRUPT
+//#define POLLING
 
 #define LINUX
 
 //#define DEBUG
+//------------------------------------------------------------------------
 
 #include <stdint.h>
 
 
 #ifdef FRDM
-
-	#define POLLING
-	#define INTERRUPTS
 	#define PRINT send_to_console_str
 #endif
 
@@ -33,6 +36,7 @@
 	#define PRINT printf
 #endif
 
+//Error handling enums
 typedef enum status_t
 {
 	OVERFLOW = -4,
@@ -43,7 +47,7 @@ typedef enum status_t
 }status;
 
 
-
+// Node for Circular Linked List
 struct node
 {
 	uint8_t data;
@@ -51,7 +55,7 @@ struct node
 };
 
 
-
+//Circular buffer declaration
 typedef struct
 {
 	struct node* front_CB;
@@ -62,8 +66,6 @@ typedef struct
 	int32_t max_size;
 	int8_t flag_init;
 }CB;
-
-
 
 
 

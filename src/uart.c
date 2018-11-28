@@ -17,12 +17,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define UART0_BAUD_RATE             (57600) 
-
-
 //declare rx_buffer and tx_buffer for data manipulation
 extern uint8_t data_pop;
 extern uint32_t database[256] ;
+
 //***********************************************************************************
 // Function definition
 //***********************************************************************************
@@ -66,8 +64,7 @@ void uartinit()
 			UART0_BDH &= ~UART0_BDH_SBR_MASK;
 			UART0_BDL &= ~UART0_BDL_SBR_MASK;
 
-			//baudmoddivisor= (uint16_t)((SystemCoreClock)/(UART0_BAUD_RATE *16));
-			baudmoddivisor = 12;
+			baudmoddivisor= (uint16_t)((SystemCoreClock)/(UART0_BAUD_RATE *16));
 			UART0_BDH |= UARTLP_BDH_SBR((baudmoddivisor >> 8)) ;
 			UART0_BDL |= UARTLP_BDL_SBR(baudmoddivisor);
 
@@ -128,7 +125,7 @@ void send_to_console_str(char data[])
 {
 	for(int i =0; data[i] != '\0'; i++)
 	{
-		//polling mode
+		//polling for transmitting
 		while(!(UART0_S1 & UART_S1_TDRE_MASK));
 		UART0_D = (data[i]);
 		while(!(UART0_S1 & UART_S1_TC_MASK));
@@ -186,10 +183,9 @@ void UART0_IRQHandler()
 
 			//updating the count database
 			database[data_pop] = database[data_pop] + 1;
-			
+
 			//initiating the systick timer
 			sys_reload();
+			PTB->PSOR = (1<<18); // off red
 		}
 }
-
-

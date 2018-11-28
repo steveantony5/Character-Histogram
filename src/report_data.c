@@ -45,8 +45,9 @@ status report_data(CB *buffer)
 	else
 	{
 		struct node* temp;
-		
+		uint32_t count = 0;
 		PRINT("\nElements in the circular buffer:\r\n");
+
 		for((temp = (buffer->front_CB)); (temp!=(buffer->rear_CB));(temp= (temp->link)))
 		{
 			#ifdef FRDM
@@ -55,9 +56,13 @@ status report_data(CB *buffer)
 			printf("%d", temp->data);
 			#endif
 			PRINT("\r\n");
+			count ++;
+
+
+
 		}
 
-
+		//print last eleemnt of the buffer
 		#ifdef FRDM
 		send_to_console(((buffer->rear_CB)->data));
 		#else
@@ -65,6 +70,15 @@ status report_data(CB *buffer)
 		#endif
 
 		PRINT("\r\n");
+
+		//print the count of elements
+		#ifdef FRDM
+		char count_str[30];
+		sprintf(count_str,"Total elements present = %u \r\n",(count+1));
+		PRINT(count_str);
+		#else
+		printf("Total elements present = %u \n",(count+1));
+		#endif
 
 		return SUCCESS;
 	}
