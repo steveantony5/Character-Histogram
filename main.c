@@ -43,21 +43,12 @@ int main(void)
 
 #ifdef LINUX
 	init_CB(&RX_buffer,5);
-	insert_data(&RX_buffer,3);
-	insert_data(&RX_buffer,10);
 
 
 
 	report_data(&RX_buffer);
 
-	delete_CB(&RX_buffer);
-	report_data(&RX_buffer);
 
-	CB TX_Buffer;
-	init_CB(&TX_Buffer,1);
-	insert_data(&TX_Buffer,9);
-	insert_data(&TX_Buffer,2);
-	report_data(&TX_Buffer);
 #endif
 
 #ifdef FRDM
