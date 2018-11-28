@@ -86,8 +86,7 @@ Boundary checks implemented
 CUnit Testing:
 -------------
 - Long automated CUnit test cases for done using random numbers for input arguments.
-- The random sequence is curtailed to be within the max size of ascii value
-- The macros count in unittest1.c file is set for the number of random nubers to be generated. And it has to be above or equal to 10 and an even number
+- The random sequence values for the circular buffer are curtailed to be within the max size of ascii value
 -----------------------------------------------------------------------------------------------
 KL25Z 
 
