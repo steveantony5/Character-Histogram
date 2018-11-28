@@ -92,14 +92,10 @@ endif
 %.o: %.S
 	-$(CC) $(CFLAGS) -c $< -o $@ 
 
-ifeq ($(PLATFORM),KL25Z)
+
 char_histogram :$(OBJS)
 	-$(CC) $(CFLAGS) $(LDFLAGS) -Xlinker -Map=char_histogram.map -o char_histogram.elf $(OBJS)
-else
-char_histogram :$(OBJS)
-	-$(CC) $(CFLAGS) -o char_histogram.elf $(OBJS)
 
-endif
 unit: 
 	gcc -Wall -o unit unittest1.c src/delete_CB.o src/insert_link.o src/insert_data.o src/clear_buffer.o src/resize_CB.o src/init_CB.o src/report_data.o src/pop_data.o -lcunit
 

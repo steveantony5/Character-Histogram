@@ -108,7 +108,6 @@ int main(void)
 
 	//configuring interrupt
 	uartinit();
-<<<<<<< HEAD
 
 	//variable to store the received data
 	uint8_t data_poll = 0;
@@ -135,34 +134,6 @@ int main(void)
 			FLAG_RECV = 0;
 		}
 
-=======
-
-	//variable to store the received data
-	uint8_t data_poll = 0;
-
-	//Flag to indicate that a data is received
-	int FLAG_RECV = 0;
-
-	while(1)
-	{
-		// Receiver polling
-		while(UART0_S1 & UART0_S1_RDRF_MASK)
-		{
-			data_poll = UART0_D;
-			FLAG_RECV = 1;
-		}
-
-		//Transmitting
-		while(FLAG_RECV == 1)
-		{
-			while(UART0_S1 & UART0_S1_TDRE_MASK)
-			{
-				UART0_D = data_poll;
-			}
-			FLAG_RECV = 0;
-		}
-
->>>>>>> d218b0ecf39364a3e81b378826b7a80a775d5dab
 	}
 #endif
 	return 1;
