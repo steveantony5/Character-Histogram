@@ -11,8 +11,11 @@
 #include "inc/common/common_variable.h"
 #include "CUnit/Basic.h"
 #include "inc/common/main.h"
+#include <time.h>
 
-#define COUNT (10)
+#define COUNT (1000)
+#define MAX_VALUE (255)
+
 uint8_t *p;
 uint8_t data_pop;
 uint8_t parameter_value[COUNT];
@@ -25,66 +28,64 @@ CB buffer_6;
 CB buffer_7;
 CB buffer_8;
 
-/*a random value generator function */
+/*random value generator function */
 int random_generator(int8_t seed)
 {
 
-   
- 
   for(int i= 0; i<COUNT; i++) 
     {
-     seed = (7 *seed) % 8191;
-     if(seed > 200)
-     {
-      seed = seed % 200;
-     }
-     parameter_value[i] = seed;
+     
+     parameter_value[i] = rand();
+     printf("%d ",parameter_value[i]);
     }
     return 0;
 
 }  
 
+/*initiating suite*/
+
+
+
+/*Suite 2*/
 int init(void)
 {
 	init_CB(&buffer_2, (COUNT/2));
 	init_CB(&buffer_3, (COUNT));
-	//return 0;
+	return 0;
 
 }
 
+/*Suite 3*/
 int init_delete(void)
 {
 	init_CB(&buffer_4, (COUNT));
-	//return 0;
+	return 0;
 }
 
-
-/*initiating suite*/
+/*Suite 1*/
 int init_suite_init_CB(void)
 {
 	return 0;
 }
 
-
+/*Suite 4*/
 int init_suite_report_data(void)
 {
     init_CB(&buffer_5, (COUNT));
 	return 0;
 }
 
+/*Suite 5*/
+
 int init_suite_resize(void)
 {
-    init_CB(&buffer_6, (COUNT/2));
+    init_CB(&buffer_6, (COUNT));
     init_CB(&buffer_7, (COUNT));
-     int i;
         
-	for(p= parameter_value,i=0; i<COUNT/2 ; i++, p++)
-	{
-		insert_data(&buffer_6,*p);
-	}
 	return 0;
 }
 
+/*Suite 6*/
 int init_suite_clear(void)
 {
     init_CB(&buffer_8, (COUNT));
@@ -106,41 +107,25 @@ int clean_suite(void)
 /*Adding test registry*/
 void test_init_CB() //suite1
 {
-        int i;
-        
-	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
-	{
-		CU_ASSERT_EQUAL(insert_data(&buffer_1,*p),BUFFER_NOT_INITIALISED);
-	}
-      
-    for(p= parameter_value,i=0; i<COUNT ; i++, p++)
-	{
-		CU_ASSERT_EQUAL(delete_CB(&buffer_1),BUFFER_NOT_INITIALISED);
-	} 
+	
+     p= parameter_value;  
 
-	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
-	{
-		CU_ASSERT_EQUAL(report_data(&buffer_1),BUFFER_NOT_INITIALISED);
-	}
+	CU_ASSERT_EQUAL(insert_data(&buffer_1,*p),BUFFER_NOT_INITIALISED);
+	CU_ASSERT_EQUAL(delete_CB(&buffer_1),BUFFER_NOT_INITIALISED);
+	CU_ASSERT_EQUAL(report_data(&buffer_1),BUFFER_NOT_INITIALISED);
+	CU_ASSERT_EQUAL(clear_buffer(&buffer_1),BUFFER_NOT_INITIALISED);
+	CU_ASSERT_EQUAL(resize_CB(&buffer_1,*p),BUFFER_NOT_INITIALISED);
+	CU_ASSERT_EQUAL(pop_data(&buffer_1,&data_pop),BUFFER_NOT_INITIALISED);
 
-	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
-	{
-		CU_ASSERT_EQUAL(clear_buffer(&buffer_1),BUFFER_NOT_INITIALISED);
-	}
 
-	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
-	{
-		CU_ASSERT_EQUAL(resize_CB(&buffer_1,*p),BUFFER_NOT_INITIALISED);
-	}
-
-	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
-	{
-		CU_ASSERT_EQUAL(init_CB(&buffer_1,*p),SUCCESS);
-	}
-        
 	CU_ASSERT_EQUAL(init_CB(&buffer_1, -1), ERROR);
 	CU_ASSERT_EQUAL(init_CB(&buffer_1, 0), ERROR);
+	CU_ASSERT_EQUAL(init_CB(&buffer_1, 1), SUCCESS);
 
+	CU_ASSERT_EQUAL(init_CB(&buffer_1,*p),SUCCESS);
+
+
+	CU_ASSERT_EQUAL(delete_CB(&buffer_1), SUCCESS);
 
 }
 
@@ -156,11 +141,12 @@ void test_insert_data() //suite2
 		}
 		else
 		{
-
+			//Buffer overflow
 			CU_ASSERT_EQUAL(insert_data(&buffer_2,*p),-4);
 		}
 	}
 	
+	//boundary conditions
 	CU_ASSERT_EQUAL(insert_data(&buffer_3, '0'),SUCCESS);
 	CU_ASSERT_EQUAL(insert_data(&buffer_3, '&'),SUCCESS);
 	CU_ASSERT_EQUAL(insert_data(&buffer_3, ','),SUCCESS);
@@ -172,7 +158,6 @@ void test_insert_data() //suite2
 	CU_ASSERT_EQUAL(insert_data(&buffer_3, 0),SUCCESS);      
     
 
-	CU_ASSERT_EQUAL(insert_data(&buffer_3, 0),SUCCESS);  
 
 	CU_ASSERT_EQUAL(delete_CB(&buffer_2), SUCCESS);
 	CU_ASSERT_EQUAL(delete_CB(&buffer_3), SUCCESS);
@@ -202,30 +187,36 @@ void test_delete_data() //suite3
 void test_pop_and_report_data() //suite4
 {
 	int i;
-  	for(p= parameter_value,i=0; i<(COUNT/2) ; i++, p++)
+
+	//inserting elements - success
+  	for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
 	{
 		CU_ASSERT_EQUAL(insert_data(&buffer_5,*p),SUCCESS);
 	}
 
-	for(i=0; i<(COUNT/2) ; i++)
+	//report data - success
+	for(i=0; i<(COUNT) ; i++)
 	{
 		
 		CU_ASSERT_EQUAL(report_data(&buffer_5),SUCCESS);
 	}
 
-	for(i=0; i<(COUNT/2) ; i++)
+	//pop data - success
+	for(i=0; i<(COUNT) ; i++)
 	{
 		
 			CU_ASSERT_EQUAL(pop_data(&buffer_5, &data_pop),SUCCESS);
 	}
 
-	for(i=0; i<(COUNT/2) ; i++)
+	//report data - empty
+	for(i=0; i<(COUNT) ; i++)
 	{
 		
 		CU_ASSERT_EQUAL(report_data(&buffer_5),EMPTY);
 	}
 
-	for(i=0; i<(COUNT/2) ; i++)
+	//pop data - empty
+	for(i=0; i<(COUNT) ; i++)
 	{
 		
 			CU_ASSERT_EQUAL(pop_data(&buffer_5, &data_pop),EMPTY);
@@ -238,20 +229,29 @@ void test_pop_and_report_data() //suite4
 void test_resize_CB() //suite5
 {
 	int i;
-     for(p= parameter_value,i=0; i<(COUNT/2) ; i++, p++)
-	{
-		CU_ASSERT_EQUAL(insert_data(&buffer_6,*p),-4);
-	}
 
-	CU_ASSERT_EQUAL(resize_CB(&buffer_6,COUNT/2),SUCCESS);
-
-	 for(p= parameter_value,i=0; i<(COUNT/2) ; i++, p++)
+	//insert data - success
+     for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
 	{
 		CU_ASSERT_EQUAL(insert_data(&buffer_6,*p),SUCCESS);
 	}
 
+	//insert data - overflow
+	CU_ASSERT_EQUAL(insert_data(&buffer_6,parameter_value[0]),-4);
+
+	//resize
+	CU_ASSERT_EQUAL(resize_CB(&buffer_6,COUNT),SUCCESS);
+
+	//insert data - success
+	 for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
+	{
+		CU_ASSERT_EQUAL(insert_data(&buffer_6,*p),SUCCESS);
+	}
+
+	//boundary cases
 	CU_ASSERT_EQUAL(resize_CB(&buffer_7,-2),ERROR);
 	CU_ASSERT_EQUAL(resize_CB(&buffer_7,0),ERROR);
+
 
 	CU_ASSERT_EQUAL(delete_CB(&buffer_6),SUCCESS);
 	CU_ASSERT_EQUAL(delete_CB(&buffer_7),SUCCESS);
@@ -387,9 +387,13 @@ int main(void)
 
 /***************************************************************************/
     /* Run all tests using the CUnit Basic interface */
-    random_generator(2);
+    time_t t;
+    /* Intializes random number generator */
+   srand((unsigned) time(&t));
+
+    random_generator(rand());
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();
 	CU_cleanup_registry();
-	return CU_get_error();
+return CU_get_error();
 }
