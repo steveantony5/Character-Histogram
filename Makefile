@@ -102,4 +102,4 @@ unit:
 	gcc -Wall -o unit UNIT_Test/unittest1.c src/delete_CB.o src/insert_link.o src/insert_data.o src/clear_buffer.o src/resize_CB.o src/init_CB.o src/report_data.o src/pop_data.o -lcunit
 
 clean: 
-	rm -f *.o *.elf ./src/*.o *map unit char_histogram
+	rm -f *.o *.elf ./src/*.o *.map unit char_histogram

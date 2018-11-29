@@ -21,6 +21,7 @@
 //------------------------------------------------------------------------
 // Mode selection in FRDM : POLLING OR INTERRUPT
 
+//define FRDM
 //#define INTERRUPT
 #define POLLING
 

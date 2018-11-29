@@ -84,12 +84,12 @@ CUnit Testing:
 - The random sequence values for the circular buffer are curtailed to be within the max size of ascii value
 -----------------------------------------------------------------------------------------------
 KL25Z 
+- Select the buad rate of 57600 as UART is configured for the same.
 
 - In the polling mode, whatever is given as input in the serial terminal will be echoed back to the terminal using UART polling.
 
 Character Histogram
 -------------------
-
 - This is implemented using the interrupt mode of UART so as to avoid the CPU wasting time in scaning for input characters
 - An histogram will be displayed based on the inputs eneterd by the user.
 - This has been tested to work for each character occurance range of the max value of uint32_t which is 4294967295
