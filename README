@@ -14,19 +14,14 @@ To generate executable for unit test
 To execute unit test
 ./unit
 
-To clean compiler products
+To clean compiled products
 >> make clean
->> make clean_map
-
-To clean unit test product
->> make uclean
 -------------------------------------------------------------------------------------------------
-Mode selections in common_variable.h
+Mode selections POLLING or INTERRUPT in FRDM
 
-For Linux & Beagle bone - Uncomment the macro #define LINUX
-For FRDM  - Uncomment the macro #define FRDM
 For the character echo application using polling UART mode, uncomment the macro #define POLLING
 For the Character Histogam application using Interrupt mode in UART, uncomment the macro #define INTERRUPT
+ 
 
 For debugging purpose, uncomment the macro #define DEBUG
 -------------------------------------------------------------------------------------------------
