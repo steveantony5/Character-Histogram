@@ -20,6 +20,11 @@
 //declare rx_buffer and tx_buffer for data manipulation
 extern uint8_t data_pop;
 extern uint32_t database[256] ;
+//variable to store the received data
+extern uint8_t data_poll;
+
+//Flag to indicate that a data is received
+extern int8_t FLAG_RECV;
 
 //***********************************************************************************
 // Function definition
@@ -188,4 +193,34 @@ void UART0_IRQHandler()
 			sys_reload();
 			PTB->PSOR = (1<<18); // off red
 		}
+}
+
+//*****************************************************************************
+// Name        : receiver_polling
+//
+// Description : receiver function when polling mode is chosen
+//
+// Arguments   : None
+//
+// return      : None
+//
+//****************************************************************************/
+void receiver_polling()
+{
+	data_poll = UART0_D;
+	FLAG_RECV = 1;
+}
+//*****************************************************************************
+// Name        : transmitter_polling
+//
+// Description : transmitter function when polling mode is chosen
+//
+// Arguments   : None
+//
+// return      : None
+//
+//****************************************************************************/
+void transmitter_polling()
+{
+	UART0_D = data_poll;
 }
