@@ -24,7 +24,11 @@ uint8_t data_pop = 0;
 char num[20];
 uint32_t prime_number;
 char prime_print[30];
+//variable to store the received data
+uint8_t data_poll = 0;
 
+//Flag to indicate that a data is received
+int8_t FLAG_RECV = 0;
 
 //***********************************************************************************
 // Function definition
@@ -115,19 +119,14 @@ int main(void)
 	//configuring interrupt
 	uartinit();
 
-	//variable to store the received data
-	uint8_t data_poll = 0;
 
-	//Flag to indicate that a data is received
-	int FLAG_RECV = 0;
 
 	while(1)
 	{
 		// Receiver polling
 		while(UART0_S1 & UART0_S1_RDRF_MASK)
 		{
-			data_poll = UART0_D;
-			FLAG_RECV = 1;
+			receiver_polling();
 		}
 
 		//Transmitting
@@ -135,7 +134,7 @@ int main(void)
 		{
 			while(UART0_S1 & UART0_S1_TDRE_MASK)
 			{
-				UART0_D = data_poll;
+				transmitter_polling();
 			}
 			FLAG_RECV = 0;
 		}
