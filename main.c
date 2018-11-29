@@ -11,6 +11,7 @@
 // Include files
 //***********************************************************************************
 
+
 #include "main.h"
 
 
@@ -23,6 +24,7 @@ uint8_t data_pop = 0;
 char num[20];
 uint32_t prime_number;
 char prime_print[30];
+
 
 //***********************************************************************************
 // Function definition
@@ -38,8 +40,11 @@ char prime_print[30];
 // return      : unused
 //
 //****************************************************************************/
+
+
 int main(void)
 {
+
 
 #ifdef LINUX
 	init_CB(&RX_buffer,5);
@@ -102,10 +107,10 @@ int main(void)
 		}
 	}
 
-	#endif
+#else
 
 	//polling mode - echoing characters
-#define POLLING
+
 
 	//configuring interrupt
 	uartinit();
@@ -137,6 +142,8 @@ int main(void)
 
 	}
 #endif
+#endif
+
 	return 1;
 }
 
@@ -214,7 +221,16 @@ void SysTick_Handler(void)
 
 	PTB->PSOR = (1<<18); // off red LED
 }
-
+//*****************************************************************************
+// Name        : LED_init_IRQ
+//
+// Description : For initiating LED
+//
+// Arguments   : none
+//
+// return      : unused
+//
+//****************************************************************************/
 void LED_init_IRQ()
 {
 	//Clock for PORT B

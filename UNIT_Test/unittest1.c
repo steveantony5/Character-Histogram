@@ -6,15 +6,28 @@
  *
  * *********************************************************************************/
 
-#include<stdio.h>
-#include<stdlib.h>
+ /**********************************************************/
+ //    Includes
+ /**********************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
 #include "../inc/common/common_variable.h"
 #include "CUnit/Basic.h"
 #include "../inc/common/main.h"
 #include <time.h>
 
-#define MAX_VALUE (255) // largest value of ascii
+ /**********************************************************/
+ //    MACROS
+ /**********************************************************/
 
+#define MAX_DATA_VALUE (255) // largest value of ascii
+#define MAX_ARRAY_LENGTH (1000)
+#define MIN_ARRAY_LENGTH (10)
+
+ /**********************************************************/
+ //    GLOBALS
+ /**********************************************************/
 uint8_t *p = NULL;
 uint8_t data_pop= 0;
 uint8_t parameter_value[2000] = {0};
@@ -27,39 +40,40 @@ CB buffer_6;
 CB buffer_7;
 CB buffer_8;
 
-int32_t COUNT = 0;
+int32_t CB_SIZE = 0;
+
+
+//***********************************************************************************
+// Function definition
+//***********************************************************************************
+
+//*****************************************************************************
+// Name        : random_generator
+//
+// Description : Generate an array of random number for giving as input in various functions
+//
+// Arguments   : none
+//
+// return      : unused
+//
+//****************************************************************************/
+
 /*random value generator function */
 int random_generator()
 {
 
-  for(uint32_t i= 0; i< COUNT; i++) 
+  for(uint32_t i= 0; i< CB_SIZE; i++) 
     {
-     
-     parameter_value[i] = (rand() % MAX_VALUE );
+     //limiting the random value to be within max value of ASCII
+     parameter_value[i] = (rand() % MAX_DATA_VALUE );
     }
     return 0;
 
 }  
 
-/*initiating suite*/
-
-
-
-/*Suite 2*/
-int init(void)
-{
-	init_CB(&buffer_2, (COUNT));
-	init_CB(&buffer_3, (COUNT));
-	return 0;
-
-}
-
-/*Suite 3*/
-int init_delete(void)
-{
-	init_CB(&buffer_4, (COUNT));
-	return 0;
-}
+//***********************************************************************************
+// initiating suite
+//***********************************************************************************
 
 /*Suite 1*/
 int init_suite_init_CB(void)
@@ -67,10 +81,26 @@ int init_suite_init_CB(void)
 	return 0;
 }
 
+/*Suite 2*/
+int init(void)
+{
+	init_CB(&buffer_2, (CB_SIZE));
+	init_CB(&buffer_3, (CB_SIZE));
+	return 0;
+
+}
+
+/*Suite 3*/
+int init_delete(void)
+{
+	init_CB(&buffer_4, (CB_SIZE));
+	return 0;
+}
+
 /*Suite 4*/
 int init_suite_report_data(void)
 {
-    init_CB(&buffer_5, (COUNT));
+    init_CB(&buffer_5, (CB_SIZE));
 	return 0;
 }
 
@@ -78,8 +108,8 @@ int init_suite_report_data(void)
 
 int init_suite_resize(void)
 {
-    init_CB(&buffer_6, (COUNT));
-    init_CB(&buffer_7, (COUNT));
+    init_CB(&buffer_6, (CB_SIZE));
+    init_CB(&buffer_7, (CB_SIZE));
         
 	return 0;
 }
@@ -87,23 +117,29 @@ int init_suite_resize(void)
 /*Suite 6*/
 int init_suite_clear(void)
 {
-    init_CB(&buffer_8, (COUNT));
+    init_CB(&buffer_8, (CB_SIZE));
      uint32_t i;
         
-	for(p= parameter_value,i=0; i<COUNT ; i++, p++)
+	for(p= parameter_value,i=0; i<CB_SIZE ; i++, p++)
 	{
 		insert_data(&buffer_8,*p);
 	}
 	return 0;
 }
 
-/*Cleaning suite*/
+//***********************************************************************************
+// Cleaning suite
+//***********************************************************************************
+
 int clean_suite(void)
 {
 	return 0;
 }
 
-/*Adding test registry*/
+//***********************************************************************************
+// Adding test registry
+//***********************************************************************************
+
 void test_init_CB() //suite1
 {
 	
@@ -112,14 +148,16 @@ void test_init_CB() //suite1
      CB *circular_buffer;
      circular_buffer = NULL; 
 
-     CU_ASSERT_EQUAL(init_CB(circular_buffer, 5), NULL_PTR);
-     CU_ASSERT_EQUAL(insert_data(circular_buffer,*p),NULL_PTR);
+     //NULL pointer check
+    CU_ASSERT_EQUAL(init_CB(circular_buffer, 5), NULL_PTR);
+    CU_ASSERT_EQUAL(insert_data(circular_buffer,*p),NULL_PTR);
 	CU_ASSERT_EQUAL(delete_CB(circular_buffer),NULL_PTR);
 	CU_ASSERT_EQUAL(report_data(circular_buffer),NULL_PTR);
 	CU_ASSERT_EQUAL(clear_buffer(circular_buffer),NULL_PTR);
 	CU_ASSERT_EQUAL(resize_CB(circular_buffer,*p),NULL_PTR);
 	CU_ASSERT_EQUAL(pop_data(circular_buffer,&data_pop),NULL_PTR);	
 
+	//Check when the Circular buffer functions are called without initializing the circular buffer
 	CU_ASSERT_EQUAL(insert_data(&buffer_1,*p),BUFFER_NOT_INITIALISED);
 	CU_ASSERT_EQUAL(delete_CB(&buffer_1),BUFFER_NOT_INITIALISED);
 	CU_ASSERT_EQUAL(report_data(&buffer_1),BUFFER_NOT_INITIALISED);
@@ -142,14 +180,16 @@ void test_init_CB() //suite1
 void test_insert_data() //suite2
 {
 	uint32_t i;
-    for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
+
+	//inserting elements
+    for(p= parameter_value,i=0; i<(CB_SIZE) ; i++, p++)
 	{
 		CU_ASSERT_EQUAL(insert_data(&buffer_2,*p),SUCCESS);
 
 	}
 	
 	//Buffer overflow
-	for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
+	for(p= parameter_value,i=0; i<(CB_SIZE) ; i++, p++)
 	{			
 			CU_ASSERT_EQUAL(insert_data(&buffer_2,*p),-4);
 		
@@ -179,7 +219,7 @@ void test_delete_data() //suite3
 {
 
 	uint32_t i;
-	for(i=0; i<COUNT ; i++)
+	for(i=0; i<CB_SIZE ; i++)
 	{
 		if(i == 0)
 		{
@@ -198,34 +238,34 @@ void test_pop_and_report_data() //suite4
 	uint32_t i;
 
 	//inserting elements - success
-  	for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
+  	for(p= parameter_value,i=0; i<(CB_SIZE) ; i++, p++)
 	{
 		CU_ASSERT_EQUAL(insert_data(&buffer_5,*p),SUCCESS);
 	}
 
 	//report data - success
-	for(i=0; i<(COUNT) ; i++)
+	for(i=0; i<(CB_SIZE) ; i++)
 	{
 		
 		CU_ASSERT_EQUAL(report_data(&buffer_5),SUCCESS);
 	}
 
 	//pop data - success
-	for(i=0; i<(COUNT) ; i++)
+	for(i=0; i<(CB_SIZE) ; i++)
 	{
 		
 			CU_ASSERT_EQUAL(pop_data(&buffer_5, &data_pop),SUCCESS);
 	}
 
 	//report data - empty
-	for(i=0; i<(COUNT) ; i++)
+	for(i=0; i<(CB_SIZE) ; i++)
 	{
 		
 		CU_ASSERT_EQUAL(report_data(&buffer_5),EMPTY);
 	}
 
 	//pop data - empty
-	for(i=0; i<(COUNT) ; i++)
+	for(i=0; i<(CB_SIZE) ; i++)
 	{
 		
 			CU_ASSERT_EQUAL(pop_data(&buffer_5, &data_pop),EMPTY);
@@ -240,7 +280,7 @@ void test_resize_CB() //suite5
 	uint32_t i;
 
 	//insert data - success
-     for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
+     for(p= parameter_value,i=0; i<(CB_SIZE) ; i++, p++)
 	{
 		CU_ASSERT_EQUAL(insert_data(&buffer_6,*p),SUCCESS);
 	}
@@ -249,10 +289,10 @@ void test_resize_CB() //suite5
 	CU_ASSERT_EQUAL(insert_data(&buffer_6,parameter_value[0]),-4);
 
 	//resize
-	CU_ASSERT_EQUAL(resize_CB(&buffer_6,COUNT),SUCCESS);
+	CU_ASSERT_EQUAL(resize_CB(&buffer_6,CB_SIZE),SUCCESS);
 
 	//insert data - success
-	 for(p= parameter_value,i=0; i<(COUNT) ; i++, p++)
+	 for(p= parameter_value,i=0; i<(CB_SIZE) ; i++, p++)
 	{
 		CU_ASSERT_EQUAL(insert_data(&buffer_6,*p),SUCCESS);
 	}
@@ -277,7 +317,16 @@ void test_clear_buffer() //suite5
 
 }
 
-/*main function*/
+//*****************************************************************************
+// Name        : main function
+//
+// Description : contains the call of the suites for unit testing
+//
+// Arguments   : none
+//
+// return      : unused
+//
+//****************************************************************************/
 int main(void)
 {
 
@@ -400,14 +449,17 @@ int main(void)
     /* Intializes random number generator */
    srand((unsigned) time(&t));
 
-  check:
-    COUNT = ((rand()) % 1000);
+  //parameter generation for circular buffer length
 
-    if((COUNT < 10))
+  refetch:
+    CB_SIZE = ((rand()) % MAX_ARRAY_LENGTH);
+
+    if((CB_SIZE < MIN_ARRAY_LENGTH))
     {
-    	goto check;
+    	goto refetch;
     }
-    printf("COUNT %d\n",COUNT);
+
+    printf("CB Length  %d\n",CB_SIZE);
     random_generator();
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();

@@ -12,20 +12,23 @@
 //***********************************************************************************
 #ifndef _COMMON_VARIABLE_H_
 #define  _COMMON_VARIABLE_H_
+#include <stdint.h>
+
+//***********************************************************************************
+// Macros
+//***********************************************************************************
 
 //------------------------------------------------------------------------
-// Mode selection
-//#define FRDM
+// Mode selection in FRDM : POLLING OR INTERRUPT
 
 //#define INTERRUPT
-//#define POLLING
-#define LINUX
+#define POLLING
 
 //#define DEBUG
 //------------------------------------------------------------------------
 
-#include <stdint.h>
 
+// Print function
 
 #ifdef FRDM
 	#define PRINT send_to_console_str
@@ -34,6 +37,10 @@
 #ifdef LINUX
 	#define PRINT printf
 #endif
+
+//***********************************************************************************
+// Globals
+//***********************************************************************************
 
 //Error handling enums
 typedef enum status_t

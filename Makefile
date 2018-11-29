@@ -54,26 +54,22 @@ KL25Z_CFLAGS= \
 
 KL25Z_LDFLAGS=-T ./platform/MKL25Z128xxx4_flash.ld
 
-BBB_CFLAGS= \
--mcpu=cortex-a8 \
--mthumb \
--mfloat-abi=hard
 
 ##########################################################################
 
 ifeq ($(PLATFORM),LINUX)
 CC=gcc
-CFLAGS=$(LINUX_CFLAGS)
+CFLAGS=$(LINUX_CFLAGS) -DLINUX
 SOURCES=$(COMMON_C_SRCS)
 
 else ifeq ($(PLATFORM),KL25Z) 
 CC=arm-none-eabi-gcc 
-CFLAGS= $(KL25Z_CFLAGS) $(LINUX_CFLAGS)
+CFLAGS= $(KL25Z_CFLAGS) $(LINUX_CFLAGS) -DFRDM
 SOURCES=$(COMMON_C_SRCS) $(KL25Z_C_SRCS) $(KL25Z_S_SRCS)
 LDFLAGS=$(KL25Z_LDFLAGS)
 
 else ifeq ($(PLATFORM),BB)
-CC=arm-linux-gnueabi-gcc
+CC=arm-linux-gnueabi-gcc -DLINUX
 CFLAGS=$(LINUX_CFLAGS) $(BBB_CFLAGS)
 SOURCES=$(COMMON_C_SRCS)
 
@@ -87,31 +83,23 @@ OBJS:= $(SOURCES:.c=.o)
 endif
 
 %.o: %.c
-	-$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 %.o: %.S
-	-$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 ifeq ($(PLATFORM),KL25Z) 
 char_histogram :$(OBJS)
-	-$(CC) $(CFLAGS) $(LDFLAGS) -Xlinker -Map=char_histogram.map -o char_histogram.elf $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -Xlinker -Map=char_histogram.map -o char_histogram.elf $(OBJS)
 else
 char_histogram :$(OBJS)
-	-$(CC) $(CFLAGS) $(LDFLAGS) -o char_histogram.elf $(OBJS)
+	$(CC) $(CFLAGS) -o char_histogram $(OBJS)
+
 endif
 
-	-@echo ' '
-	-size char_histogram.elf
 
 unit: 
 	gcc -Wall -o unit UNIT_Test/unittest1.c src/delete_CB.o src/insert_link.o src/insert_data.o src/clear_buffer.o src/resize_CB.o src/init_CB.o src/report_data.o src/pop_data.o -lcunit
 
-clean:
-	-rm *.o char_histogram.elf 
-	-rm ./src/*.o
-
-clean_map:
-	-rm char_histogram.map
-
-uclean:
-	-rm unit
+clean: 
+	rm -f *.o *.elf ./src/*.o *map unit char_histogram
