@@ -61,5 +61,7 @@ status report_data(CB *);
 status clear_buffer(CB *);
 status pop_data(CB *,uint8_t *);
 void LED_init_IRQ();
+void receiver_polling();
+void transmitter_polling();
 
 #endif
