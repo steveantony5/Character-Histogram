@@ -28,6 +28,8 @@ void uartinit();
 void RX_interrupt_init();
 void send_to_console_str(char []);
 void send_to_console(uint8_t);
+void receiver_polling();
+void transmitter_polling();
 
 status resize_CB(CB *, int32_t );
 status insert_link(CB *);
